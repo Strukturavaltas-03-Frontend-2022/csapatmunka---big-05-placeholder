@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CategoryService } from './service/backend/category.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'webshop';
+
+  constructor(private categorySvc: CategoryService) {
+    console.log(this.categorySvc.categories);
+  }
 }
