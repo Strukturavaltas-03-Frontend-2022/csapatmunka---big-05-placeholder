@@ -11,7 +11,9 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HomeComponent } from './page/home/home.component';
 import { HeaderComponent } from './common/header/header.component';
+import { OrderComponent } from './page/order/order.component';
 import { SpinnerComponent } from './common/spinner/spinner.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SpinnerComponent } from './common/spinner/spinner.component';
     SidebarComponent,
     HomeComponent,
     HeaderComponent,
+    OrderComponent
     SpinnerComponent
+
   ],
   imports: [
     BrowserModule,
