@@ -4,6 +4,7 @@
 
 export const environment = {
 
+
   apiURL: 'https://nettuts.hu/jms/csapat05/',
   entity: {
     bill:'bill',
@@ -15,6 +16,7 @@ export const environment = {
   },
 
   production: false
+
 };
 
 
