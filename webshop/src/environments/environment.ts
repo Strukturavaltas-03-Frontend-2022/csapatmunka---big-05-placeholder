@@ -3,9 +3,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'https://nettuts.hu/jms/csapat05/'
+
+
+  apiURL: 'https://nettuts.hu/jms/csapat05/',
+  entity: {
+    bill:'bill',
+    order: 'order',
+    address: 'address',
+    customer: 'customer',
+    product: 'product',
+    category: 'category'
+  },
+
+  production: false
+
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
