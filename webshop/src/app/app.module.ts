@@ -11,11 +11,13 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HomeComponent } from './page/home/home.component';
 import { HeaderComponent } from './common/header/header.component';
+import { OrderComponent } from './page/order/order.component';
 import { SpinnerComponent } from './common/spinner/spinner.component';
 import { CustomerComponent } from './page/customer/customer.component';
 import { AddressComponent } from './page/address/address.component';
 import { ProductSortPipe } from './pipe/product-sort.pipe';
 import { EditCustomerComponent } from './page/edit-customer/edit-customer.component';
+
 
 @NgModule({
   declarations: [
@@ -23,11 +25,13 @@ import { EditCustomerComponent } from './page/edit-customer/edit-customer.compon
     SidebarComponent,
     HomeComponent,
     HeaderComponent,
-    SpinnerComponent,
     CustomerComponent,
     AddressComponent,
     ProductSortPipe,
     EditCustomerComponent
+    OrderComponent
+    SpinnerComponent
+
   ],
   imports: [
     BrowserModule,

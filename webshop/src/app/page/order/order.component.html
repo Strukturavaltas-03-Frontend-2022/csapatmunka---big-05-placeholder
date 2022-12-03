@@ -1,0 +1,29 @@
+<!--  id: number = 0;
+  customerID: number = 0;
+  productID: number = 0;
+  amount: number = 0;
+  status: string = "new";-->
+
+<div class="row">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>CustomerID</th>
+          <th>ProductID</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of list | async">
+          <td>{{ order.customerID }}</td>
+          <td>{{ order.product?.name }}</td>
+          <td>{{ order.amount }}</td>
+          <td>{{ order.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
