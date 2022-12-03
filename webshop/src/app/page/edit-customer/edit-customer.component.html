@@ -5,7 +5,7 @@
     </div>
   </div>
 <div *ngIf="selectedCustomer$ | async as customer">
-  <form action="" #customerEditor="ngForm">
+  <form action="" #customerEditor="ngForm" (ngSubmit)="onSaveCustomer(customer)">
     <div class="form-group">
       <label for="firstName">First name:</label>
       <input id="firstName" name="firstName" class="form-control" type="text" [(ngModel)]="customer.firstName">
@@ -18,13 +18,24 @@
       <label for="email">Email:</label>
       <input id="email" name="email" class="form-control" type="text" [(ngModel)]="customer.email">
     </div>
-    <div class="row" *ngIf="selectedAddress$ | async as address">
-      <div class="line"></div>
+    <div class="line"></div>
+  </form>
+</div>
+<div class="row" *ngIf="selectedAddress$ | async as address">
+  <form action="" #addressEditor="ngForm" (ngSubmit)="onSaveAddress(address)">
       <div class="form-group d-flex">
         <label *ngIf="address.zip" for="zip">ZIP:</label>
         <input *ngIf="address.zip" id="zip" name="zip" class="form-control" type="text" [(ngModel)]="address.zip">
         <label for="country">Country:</label>
-        <input id="country" name="country" class="form-control" type="text" [(ngModel)]="address.country">
+        <input id="country" placeholder="Pick one"
+        aria-label="Number" name="country"
+        class="form-control" type="text"
+         matInput [matAutocomplete]="auto" [(ngModel)]="address.country">
+         <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let country of countries" [value]="country.country">
+            {{country.country}}
+          </mat-option>
+        </mat-autocomplete>
         <label for="city">City:</label>
         <input id="city" name="city" class="form-control" type="text" [(ngModel)]="address.city">
       </div>
@@ -34,15 +45,14 @@
       </div>
       <div class="form-group">
         <label for="notes">Remark:</label>
-        <input id="notes" name="notes" class="form-control" type="text" [(ngModel)]="address.notes">
-      </div>
-    </div>
-    <div class="d-grip gap-2">
-      <button class="btn btn-primary" type="submit">
+        <textarea id="notes" rows="3" name="notes" class="form-control" type="text" [(ngModel)]="address.notes"></textarea>
+            </div>
+  </form>
+</div>
+    <div class="d-flex">
+      <button class="btn btn-success text-capitalize mx-auto" type="submit">
         <i class="fa fa-save"></i> Update customer
       </button>
     </div>
-  </form>
-</div>
 </div>
 
