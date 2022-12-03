@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Category } from 'src/app/common/model/category.model';
 import { UiService } from '../common/ui.service';
 
@@ -10,11 +10,11 @@ import { UiService } from '../common/ui.service';
 })
 export class CategoryService {
   entityName: string = 'category';
-  apiUrl: string = `${environment.apiUrl}${this.entityName}`;
-  private _categories: Category[] = [];
+  apiUrl: string = `${environment.apiURL}${this.entityName}`;
+  private _categories = new BehaviorSubject<Category[]>([]);
 
   get categories() {
-    return this._categories;
+    return this._categories as Observable<Category[]>;
   }
 
   constructor(
@@ -25,8 +25,7 @@ export class CategoryService {
     this.getAll()
       .pipe(
         tap((categories: Category[]) => {
-          this._categories = categories;
-          console.log(this._categories);
+          this._categories.next(categories);
           this.uiService.loading.next(false);
         })
       )

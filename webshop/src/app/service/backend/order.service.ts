@@ -11,7 +11,7 @@ export class OrderService {
 
   entityName: string = 'order';
 
-  apiUrl: string = `${environment.apiUrl}${this.entityName}`
+  apiUrl: string = `${environment.apiURL}${this.entityName}`
 
   http: HttpClient = inject(HttpClient)
 

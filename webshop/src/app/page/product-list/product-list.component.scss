@@ -1,0 +1,32 @@
+.product-list {
+  &__table_head {
+    cursor: pointer;
+  }
+
+  &__row {
+    &_name {
+      width: 20%;
+    }
+
+    &_type {
+      width: 15%;
+    }
+
+    &_category {
+      width: 10%;
+    }
+
+    &_description {
+      width: 30%;
+      white-space: unset;
+    }
+
+    &_price {
+      width: 10%;
+    }
+
+    &_actions {
+      width: 10%;
+    }
+  }
+}
