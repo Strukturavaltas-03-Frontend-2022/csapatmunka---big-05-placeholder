@@ -19,6 +19,8 @@ import { ProductSortPipe } from './pipe/product-sort.pipe';
 import { EditCustomerComponent } from './page/edit-customer/edit-customer.component';
 import { ProductListComponent } from './page/product-list/product-list.component';
 import { ShortenPipe } from './common/pipes/shorten.pipe';
+
+
 import { EditOrderComponent } from './page/edit-order/edit-order.component';
 
 
@@ -36,6 +38,9 @@ import { EditOrderComponent } from './page/edit-order/edit-order.component';
     SpinnerComponent,
     ProductListComponent,
     ShortenPipe,
+
+
+
     EditOrderComponent,
   ],
   imports: [
