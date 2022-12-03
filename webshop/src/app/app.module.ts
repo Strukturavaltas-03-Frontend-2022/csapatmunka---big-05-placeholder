@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@angular/cdk/overlay'
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { IMaskModule } from 'angular-imask';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
@@ -19,6 +20,7 @@ import { ProductSortPipe } from './pipe/product-sort.pipe';
 import { EditCustomerComponent } from './page/edit-customer/edit-customer.component';
 import { ProductListComponent } from './page/product-list/product-list.component';
 import { ShortenPipe } from './common/pipes/shorten.pipe';
+import { EditProductComponent } from './page/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ShortenPipe } from './common/pipes/shorten.pipe';
     SpinnerComponent,
     ProductListComponent,
     ShortenPipe,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +44,10 @@ import { ShortenPipe } from './common/pipes/shorten.pipe';
     AppRoutingModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     OverlayModule,
+    IMaskModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

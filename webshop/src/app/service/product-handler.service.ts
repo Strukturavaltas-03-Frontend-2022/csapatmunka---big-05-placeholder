@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, pipe, tap } from 'rxjs';
 import { Product } from '../common/model/product.model';
 import { ProductService } from './backend/product.service';
 import { UiService } from './common/ui.service';
@@ -17,6 +18,7 @@ export class ProductHandlerService {
   constructor(
     private productSvc: ProductService,
     private uiService: UiService,
+    private router: Router,
   ) {}
 
   getProducts() {
@@ -35,10 +37,38 @@ export class ProductHandlerService {
   }
 
   createProduct(product: Product) {
-    this.productSvc.create(product);
+    this.uiService.loading.next(true);
+    this.productSvc.create(product).pipe(
+      tap((product) => {
+        this.getProducts();
+        this.router.navigate(['product-list']);
+        this.uiService.loading.next(false);
+      }),
+    ).subscribe();
   }
 
+  modifyProduct(product: Product) {
+    this.uiService.loading.next(true);
+    this.productSvc.update(product).pipe(
+      tap((product) => {
+        this.getProducts();
+        this.router.navigate(['product-list']);
+        this.uiService.loading.next(false);
+      }),
+    ).subscribe();
+  };
+
   removeProduct(productId: number) {
-    this.productSvc.remove(productId);
-  }
+    this.uiService.loading.next(true);
+    this.productSvc.remove(productId).pipe(
+      tap((product) => {
+        this.getProducts();
+        const currentUrl = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+        });
+        this.uiService.loading.next(false);
+      }),
+    ).subscribe();
+  };
 }

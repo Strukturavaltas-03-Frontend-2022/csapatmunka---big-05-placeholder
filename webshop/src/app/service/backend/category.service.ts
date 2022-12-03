@@ -12,6 +12,7 @@ export class CategoryService {
   entityName: string = 'category';
   apiUrl: string = `${environment.apiURL}${this.entityName}`;
   private _categories = new BehaviorSubject<Category[]>([]);
+  public categoryList: Category[] = [];
 
   get categories() {
     return this._categories as Observable<Category[]>;
@@ -26,6 +27,7 @@ export class CategoryService {
       .pipe(
         tap((categories: Category[]) => {
           this._categories.next(categories);
+          this.categoryList = categories;
           this.uiService.loading.next(false);
         })
       )
