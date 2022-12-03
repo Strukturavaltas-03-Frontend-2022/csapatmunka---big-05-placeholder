@@ -15,7 +15,7 @@ export class UiService {
     this.loading.pipe(
       tap((loading) => {
         loading
-          ? this.showSpinner()
+          ? this.spinnerRef.hasAttached() ? null: this.showSpinner()
           : this.spinnerRef.hasAttached() ? this.stopSpinner() : null;
       })
     ).subscribe();

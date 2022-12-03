@@ -12,6 +12,8 @@ import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HomeComponent } from './page/home/home.component';
 import { HeaderComponent } from './common/header/header.component';
 import { SpinnerComponent } from './common/spinner/spinner.component';
+import { ProductListComponent } from './page/product-list/product-list.component';
+import { ShortenPipe } from './common/pipes/shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SpinnerComponent } from './common/spinner/spinner.component';
     SidebarComponent,
     HomeComponent,
     HeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ProductListComponent,
+    ShortenPipe,
   ],
   imports: [
     BrowserModule,
