@@ -21,7 +21,9 @@ export class AddressService {
 
   http: HttpClient = inject(HttpClient)
 
-  constructor() { }
+  constructor() {
+    this.getAll()
+   }
 
   getCachedItemIndexById(id: number): number{
     id = Number(id);

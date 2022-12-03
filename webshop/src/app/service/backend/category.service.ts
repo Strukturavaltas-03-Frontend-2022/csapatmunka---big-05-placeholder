@@ -26,7 +26,6 @@ export class CategoryService {
       .pipe(
         tap((categories: Category[]) => {
           this._categories.next(categories);
-          console.log(this._categories);
           this.uiService.loading.next(false);
         })
       )

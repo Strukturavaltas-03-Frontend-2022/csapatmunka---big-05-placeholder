@@ -12,16 +12,20 @@
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price</th>
+                  <th
+                    *ngFor="let col of tableColumns"
+                    (click)="startSort(col.key)"
+                    class="product-list__table_head text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    <i *ngIf="col.key === sortKey && sortDirection === 1" class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+                    <i *ngIf="col.key === sortKey && sortDirection === -1" class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                      {{ col.title }}
+                  </th>
                   <th class="text-secondary opacity-7 ps-2"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let product of (products | async)">
+                <tr *ngFor="let product of (products | async) | productsort:sortKey:sortDirection">
                   <td class="product-list__row_name">
                     <div class="d-flex px-2 py-1">
                       <p class="text-xs font-weight-bold mb-0">{{ product.name }}</p>

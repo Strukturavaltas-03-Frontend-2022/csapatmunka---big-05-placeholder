@@ -1,4 +1,8 @@
 .product-list {
+  &__table_head {
+    cursor: pointer;
+  }
+
   &__row {
     &_name {
       width: 20%;
