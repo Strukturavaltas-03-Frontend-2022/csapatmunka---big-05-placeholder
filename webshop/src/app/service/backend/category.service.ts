@@ -10,7 +10,7 @@ import { UiService } from '../common/ui.service';
 })
 export class CategoryService {
   entityName: string = 'category';
-  apiUrl: string = `${environment.apiUrl}${this.entityName}`;
+  apiUrl: string = `${environment.apiURL}${this.entityName}`;
   private _categories: Category[] = [];
 
   get categories() {

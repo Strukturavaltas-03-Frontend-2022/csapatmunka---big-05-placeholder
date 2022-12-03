@@ -19,7 +19,9 @@ export class CustomerService {
 
   http: HttpClient = inject(HttpClient)
 
-  constructor() { }
+  constructor() {
+    this.getAll()
+   }
 
   getCachedItemIndexById(id: number): number{
     id = Number(id);
@@ -68,6 +70,14 @@ export class CustomerService {
       }
     })
   }
+
+/*   delete(id: number):void{
+    this.http.delete<Customer>(`${this.apiURL}${this.entityName}/${id}`).subscribe({
+      next: () => {
+        this.getAll()
+      }
+    })
+  } */
 
   add(customer: Customer): void{
     this.http.post<Customer[]>(`${this.apiURL}${this.entityName}`,customer).subscribe({

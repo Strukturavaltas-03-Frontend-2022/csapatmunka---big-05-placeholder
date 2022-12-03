@@ -12,6 +12,10 @@ import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HomeComponent } from './page/home/home.component';
 import { HeaderComponent } from './common/header/header.component';
 import { SpinnerComponent } from './common/spinner/spinner.component';
+import { CustomerComponent } from './page/customer/customer.component';
+import { AddressComponent } from './page/address/address.component';
+import { ProductSortPipe } from './pipe/product-sort.pipe';
+import { EditCustomerComponent } from './page/edit-customer/edit-customer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { SpinnerComponent } from './common/spinner/spinner.component';
     SidebarComponent,
     HomeComponent,
     HeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CustomerComponent,
+    AddressComponent,
+    ProductSortPipe,
+    EditCustomerComponent
   ],
   imports: [
     BrowserModule,
