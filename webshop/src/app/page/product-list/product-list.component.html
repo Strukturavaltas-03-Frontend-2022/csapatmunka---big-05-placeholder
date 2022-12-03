@@ -8,6 +8,11 @@
           </div>
         </div>
         <div class="card-body px-0 pb-2">
+          <div class="text-center">
+            <a [routerLink]="'/product/' + 0" class="btn btn-info w-80">
+              Add new product
+            </a>
+          </div>
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
               <thead>
@@ -44,13 +49,9 @@
                     <p class="text-xs text-secondary mb-0">{{ product.price }}</p>
                   </td>
                   <td class="product-list__row_actions">
-                    <div class="d-flex gap-2">
-                      <button class="btn btn-info m-0">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                      </button>
-                      <button class="btn btn-danger m-0">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                      </button>
+                    <div class="btn-group d-flex gap-3">
+                      <a class="text-primary" [routerLink]="['/product', product.id]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                      <a class="text-danger" (click)="onDelete(product.id)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
                     </div>
                   </td>
                 </tr>

@@ -36,4 +36,8 @@ export class ProductListComponent {
     }
     this.sortKey = key;
   }
+
+  onDelete(productId: number) {
+    this.productHandlerSvc.removeProduct(productId);
+  }
 }
