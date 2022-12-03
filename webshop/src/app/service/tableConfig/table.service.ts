@@ -27,5 +27,13 @@ export class TableService {
     {title: 'Price', key: 'price'},
   ];
 
+  orderTableColumns: ITableColumn[] = [
+    {title: 'Customer', key: 'customer'},
+    {title: 'Product', key: 'product'},
+    {title: 'Amount', key: 'amount'},
+    {title: 'Status', key: 'status'},
+  ];
+
+
   constructor() { }
 }

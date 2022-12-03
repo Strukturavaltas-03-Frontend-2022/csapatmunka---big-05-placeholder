@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class OrderService {
+  delete(order: Order) {
+    throw new Error('Method not implemented.');
+  }
 
   entityName: string = 'order';
 
@@ -23,7 +26,7 @@ export class OrderService {
     return this.http.get<Order[]>(this.apiUrl);
   }
 
-  getOne(id:number): Observable<Order>{
+  get(id:number): Observable<Order>{
     return this.http.get<Order>(`${this.apiUrl}/${id}`);
   }
 
