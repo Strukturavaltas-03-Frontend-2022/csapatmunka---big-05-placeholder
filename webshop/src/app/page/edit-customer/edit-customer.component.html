@@ -1,4 +1,48 @@
-<p>edit-customer works!</p>
-<pre>
-  {{ selectedCustomer$ | async | json }}
-</pre>
+<div class="card my-4">
+  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+      <h6 class="text-white text-capitalize ps-3">Change customer</h6>
+    </div>
+  </div>
+<div *ngIf="selectedCustomer$ | async as customer">
+  <form action="" #customerEditor="ngForm">
+    <div class="form-group">
+      <label for="firstName">First name:</label>
+      <input id="firstName" name="firstName" class="form-control" type="text" [(ngModel)]="customer.firstName">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name:</label>
+      <input id="lastName" name="lastName" class="form-control" type="text" [(ngModel)]="customer.lastName">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" name="email" class="form-control" type="text" [(ngModel)]="customer.email">
+    </div>
+    <div class="row" *ngIf="selectedAddress$ | async as address">
+      <div class="line"></div>
+      <div class="form-group d-flex">
+        <label *ngIf="address.zip" for="zip">ZIP:</label>
+        <input *ngIf="address.zip" id="zip" name="zip" class="form-control" type="text" [(ngModel)]="address.zip">
+        <label for="country">Country:</label>
+        <input id="country" name="country" class="form-control" type="text" [(ngModel)]="address.country">
+        <label for="city">City:</label>
+        <input id="city" name="city" class="form-control" type="text" [(ngModel)]="address.city">
+      </div>
+      <div class="form-group">
+        <label for="street">Street:</label>
+        <input id="street" name="street" class="form-control" type="text" [(ngModel)]="address.street">
+      </div>
+      <div class="form-group">
+        <label for="notes">Remark:</label>
+        <input id="notes" name="notes" class="form-control" type="text" [(ngModel)]="address.notes">
+      </div>
+    </div>
+    <div class="d-grip gap-2">
+      <button class="btn btn-primary" type="submit">
+        <i class="fa fa-save"></i> Update customer
+      </button>
+    </div>
+  </form>
+</div>
+</div>
+

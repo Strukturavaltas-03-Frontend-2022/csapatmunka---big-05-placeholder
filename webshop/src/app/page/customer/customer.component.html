@@ -50,7 +50,7 @@
           </td>
           <td class="align-middle">
             <div class="btn-group d-flex gap-3">
-              <a class="text-primary" [routerLink]="['/customers/edit', customer.id]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+              <a class="text-primary" [routerLink]="['/customers/edit', customer.id, customer.address?.customerID]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
               <a class="text-danger" (click)="onDelete(customer.id)"> <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> </a>
             </div>
           </td>
