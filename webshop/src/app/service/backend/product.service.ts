@@ -8,9 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductService {
-
   entityName: string = 'product'
-  apiUrl: string = `${environment.apiUrl}${this.entityName}`
+  apiUrl: string = `${environment.apiURL}${this.entityName}`
 
   constructor(private http: HttpClient) {}
 
@@ -18,19 +17,19 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiUrl);
   }
 
-  getOne(id:number): Observable<Product>{
+  get(id: number): Observable<Product>{
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  create(product:Product): Observable<Product[]>{
-    return this.http.post<Product[]>(this.apiUrl, product);
+  create(product: Product): Observable<Product>{
+    return this.http.post<Product>(this.apiUrl, product);
   }
 
   update(product: Product): Observable<Product>{
     return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
   }
 
-  remove(id:number): Observable<Product>{
+  remove(id: number): Observable<Product>{
     return this.http.delete<Product>(`${this.apiUrl}/${id}`);
   }
 }

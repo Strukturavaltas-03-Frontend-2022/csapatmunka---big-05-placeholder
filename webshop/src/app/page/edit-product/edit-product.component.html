@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <form [formGroup]="productEditorForm" class="d-flex flex-column gap-2 w-60">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" type="input" class="form-control" minlength="3" maxlength="35">
+      <div
+        *ngIf="productEditorForm.controls['name'].dirty && productEditorForm.controls['name'].hasError('required')"
+        class="text-danger"
+      >
+        This field is mandatory
+      </div>
+      <div *ngIf="productEditorForm.controls['name'].hasError('minlength')" class="text-danger">
+        Minimum 3 characters
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type">Type</label>
+      <input id="type" formControlName="type" type="input" class="form-control" minlength="3" maxlength="25">
+      <div
+      *ngIf="productEditorForm.controls['type'].dirty && productEditorForm.controls['type'].hasError('required')"
+      class="text-danger"
+    >
+      This field is mandatory
+    </div>
+    <div *ngIf="productEditorForm.controls['type'].hasError('minlength')" class="text-danger">
+      Minimum 3 characters
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category" formControlName="category" class="form-select">
+        <option value="" disabled>Select category</option>
+        <option *ngFor="let category of categories | async" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+      <div
+      *ngIf="productEditorForm.controls['category'].touched && productEditorForm.controls['category'].hasError('required')"
+      class="text-danger"
+    >
+      This field is mandatory
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" rows="3" minlength="3" maxlength="255"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input
+        id="price"
+        formControlName="price"
+        type="input"
+        class="form-control"
+        [imask]="priceMask">
+      <div
+        *ngIf="productEditorForm.controls['price'].touched && productEditorForm.controls['price'].hasError('required')"
+        class="text-danger"
+      >
+        This field is mandatory
+      </div>
+    </div>
+    <div class="form-check p-0">
+      <input id="featured" formControlName="featured" class="form-check-input" type="checkbox" value="">
+      <label class="form-check-label" for="featured">
+        Featured
+      </label>
+    </div>
+    <div class="form-check p-0">
+      <input id="active" formControlName="active" class="form-check-input" type="checkbox" value="">
+      <label class="form-check-label" for="active">
+        Active
+      </label>
+    </div>
+    <div class="d-flex justify-content-end gap-2">
+      <button
+        routerLink="/product-list"
+        class="btn btn-secondary text-capitalize"
+      >
+        Cancel
+      </button>
+      <button
+        [disabled]="productEditorForm.invalid"
+        class="btn btn-success text-capitalize"
+        (click)="save()"
+      >
+        <i class="fa fa-save"></i>
+        Save
+      </button>
+    </div>
+  </form>
+</div>

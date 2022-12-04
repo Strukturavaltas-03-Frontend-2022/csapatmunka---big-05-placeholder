@@ -1,0 +1,57 @@
+<!--  id: number = 0;
+  customerID: number = 0;
+  productID: number = 0;
+  amount: number = 0;
+  status: string = "new";-->
+<div class="container">
+  <div class="row col-12">
+  <div class="col-sm-12 col-md-6 col-xl-3 mb-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="startSort(col.key)" *ngFor="let col of cols">
+            <i
+              [hidden]="col.key !== sortKey && sortDirection === -1"
+              class="fa fa-sort-asc"
+              aria-hidden="true"
+            ></i>
+            <i
+              [hidden]="col.key !== sortKey && sortDirection === 1"
+              class="fa fa-sort-desc"
+              aria-hidden="true"
+            ></i>
+            {{ col.title }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let order of list | async | productsort : sortKey : sortDirection
+          "
+        >
+          <td>
+            {{ order.customer?.firstName }} {{ order.customer?.lastName }}
+          </td>
+          <td>{{ order.product?.name }}</td>
+          <td>{{ order.amount }}</td>
+          <td>{{ order.status }}</td>
+          <td>
+            <div class="d-flex btn-group align-items-end">
+              <button [routerLink]="['/orders/edit', order.id]" class="btn btn-info">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-danger" (click)="onUpdate(order)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+         </td>
+        <tr class="table__tr--sum">
+          <td *ngFor="let col of cols" >
+            {{ col.title }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
