@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IMaskModule } from 'angular-imask';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
@@ -48,6 +49,7 @@ import { EditProductComponent } from './page/edit-product/edit-product.component
     HttpClientModule,
     OverlayModule,
     IMaskModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
