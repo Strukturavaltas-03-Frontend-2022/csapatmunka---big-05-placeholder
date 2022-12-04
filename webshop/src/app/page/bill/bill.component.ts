@@ -15,7 +15,7 @@ export class BillComponent  {
   configService: ConfigService = inject(ConfigService);
 
   columns: ITableColumn[] = this.configService.billTableColumns;
-  userList$: Observable<Bill[]> = this.billService.getAll();
+  billList$: Observable<Bill[]> = this.billService.getAll();
 
 
   constructor(
