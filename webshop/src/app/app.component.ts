@@ -9,7 +9,5 @@ import { CategoryService } from './service/backend/category.service';
 export class AppComponent {
   title = 'webshop';
 
-  constructor(private categorySvc: CategoryService) {
-    console.log(this.categorySvc.categories);
-  }
+  constructor(private categorySvc: CategoryService) {}
 }

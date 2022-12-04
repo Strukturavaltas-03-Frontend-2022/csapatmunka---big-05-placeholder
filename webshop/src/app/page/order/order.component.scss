@@ -1,0 +1,14 @@
+table {
+  th {
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    color: rgba(255, 0, 0, 0.646);
+  }
+}
+  .table__tr--sum {
+    background-color: lightgray;
+  }
+
+}
+

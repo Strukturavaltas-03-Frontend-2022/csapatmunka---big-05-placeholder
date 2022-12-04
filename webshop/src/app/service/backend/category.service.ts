@@ -3,24 +3,32 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Category } from 'src/app/common/model/category.model';
+import { UiService } from '../common/ui.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
   entityName: string = 'category';
-  apiUrl: string = `${environment.apiUrl}${this.entityName}`;
+  apiUrl: string = `${environment.apiURL}${this.entityName}`;
   private _categories = new BehaviorSubject<Category[]>([]);
+  public categoryList: Category[] = [];
 
   get categories() {
     return this._categories as Observable<Category[]>;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private uiService: UiService,
+  ) {
+    this.uiService.loading.next(true);
     this.getAll()
       .pipe(
         tap((categories: Category[]) => {
           this._categories.next(categories);
+          this.categoryList = categories;
+          this.uiService.loading.next(false);
         })
       )
       .subscribe();
