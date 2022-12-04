@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import * as IMask from 'imask';
 import { omit } from 'lodash-es';
 import { map } from 'rxjs';
+import { priceMask } from 'src/app/common/masks';
 import { CategoryService } from 'src/app/service/backend/category.service';
 import { UiService } from 'src/app/service/common/ui.service';
 import { ProductHandlerService } from 'src/app/service/product-handler.service';
@@ -18,11 +18,7 @@ export class EditProductComponent {
   public categories = this.categorySvc.categories.pipe(
     map(cats => cats.map(cat => cat.name))
   );
-  public priceMask = {
-    mask: IMask.MaskedRange,
-    from: 1,
-    to: 999999,
-  };
+  public priceMask = priceMask;
   private productId: number;
 
   constructor(

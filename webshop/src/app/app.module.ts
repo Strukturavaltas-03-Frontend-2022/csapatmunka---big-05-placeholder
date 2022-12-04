@@ -22,6 +22,7 @@ import { EditCustomerComponent } from './page/edit-customer/edit-customer.compon
 import { ProductListComponent } from './page/product-list/product-list.component';
 import { ShortenPipe } from './common/pipes/shorten.pipe';
 import { EditProductComponent } from './page/edit-product/edit-product.component';
+import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { EditProductComponent } from './page/edit-product/edit-product.component
     ProductListComponent,
     ShortenPipe,
     EditProductComponent,
+    ToggleButtonComponent,
   ],
   imports: [
     BrowserModule,
