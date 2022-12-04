@@ -8,6 +8,86 @@
           </div>
         </div>
         <div class="card-body px-0 pb-2">
+          <div class="px-3">
+            <app-toggle-button
+              accessorName="productFilter"
+              [ownFormControl]="productFilter"
+              (checked)="switchFilter($event)"
+            ></app-toggle-button>
+          </div>
+          <div class="px-3 pt-1 pb-3">
+            <div *ngIf="showFilter | async" class="border border-primary rounded">
+              <form [formGroup]="productListForm" class="product-list__form">
+                <div class="product-list__form_input form-group">
+                  <label for="name">Name</label>
+                  <input id="name" formControlName="name" type="input" class="form-control" minlength="3" maxlength="35">
+                  <div *ngIf="productListForm.controls['name'].hasError('minlength')" class="text-danger">
+                    Minimum 3 characters
+                  </div>
+                </div>
+                <div class="product-list__form_input form-group">
+                  <label for="type">Type</label>
+                  <input id="type" formControlName="type" type="input" class="form-control" minlength="3" maxlength="25">
+                  <div *ngIf="productListForm.controls['type'].hasError('minlength')" class="text-danger">
+                    Minimum 3 characters
+                  </div>
+                </div>
+                <div class="product-list__form_input form-group">
+                  <label for="catID">Category</label>
+                  <select id="catID" formControlName="catID" class="form-select">
+                    <option value="">All selected</option>
+                    <option *ngFor="let category of categories | async" [value]="category.id">
+                      {{ category.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="product-list__form_input form-group">
+                  <label for="description">Description</label>
+                  <input id="description" formControlName="description" type="input" class="form-control" minlength="3" maxlength="255">
+                  <div *ngIf="productListForm.controls['description'].hasError('minlength')" class="text-danger">
+                    Minimum 3 characters
+                  </div>
+                </div>
+                <div class="product-list__form_input form-group">
+                  <label for="price">Price from</label>
+                  <input
+                    id="price"
+                    formControlName="priceFrom"
+                    type="input"
+                    class="form-control"
+                    [imask]="priceMask">
+                </div>
+                <div class="product-list__form_input form-group">
+                  <label for="price">Price to</label>
+                  <input
+                    id="price"
+                    formControlName="priceTo"
+                    type="input"
+                    class="form-control"
+                    [imask]="priceMask">
+                </div>
+                <div class="product-list__form_input form-check p-0">
+                  <input id="featured" formControlName="featured" class="form-check-input" type="checkbox" value="">
+                  <label class="form-check-label" for="featured">
+                    Featured
+                  </label>
+                </div>
+                <div class="product-list__form_input form-check p-0">
+                  <input id="active" formControlName="active" class="form-check-input" type="checkbox" value="">
+                  <label class="form-check-label" for="active">
+                    Active
+                  </label>
+                </div>
+              </form>
+              <div class="product-list__filter-btn">
+                <button
+                  class="btn btn-primary text-capitalize m-0"
+                  [disabled]="productListForm.invalid"
+                  (click)="filterProducts()"
+                >Filter</button>
+              </div>
+            </div>
+          </div>
           <div class="text-center">
             <a [routerLink]="'/product/' + 0" class="btn btn-info w-80">
               Add new product
@@ -40,7 +120,7 @@
                     <p class="text-xs text-secondary mb-0">{{ product.type }}</p>
                   </td>
                   <td class="product-list__row_category">
-                    <span class="text-xs text-secondary mb-0">{{ (categories | async)?.length ? (categories | async)?.[product.catID - 1] : '' }}</span>
+                    <span class="text-xs text-secondary mb-0">{{ (categories | async)?.length ? (categories | async)?.[product.catID - 1]?.name : '' }}</span>
                   </td>
                   <td class="product-list__row_description">
                     <p class="text-xs text-secondary mb-0">{{ product.description | shorten }}</p>

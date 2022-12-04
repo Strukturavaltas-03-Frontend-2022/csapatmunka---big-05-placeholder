@@ -1,4 +1,5 @@
 export class Product {
+  [key: string]: any;
   id?: number = 0;
   name: string = '';
   type: string = '';
