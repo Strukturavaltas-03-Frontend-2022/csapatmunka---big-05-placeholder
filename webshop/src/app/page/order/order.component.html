@@ -42,27 +42,27 @@
                   *ngFor="
                     let order of list
                       | productsort : sortKey : sortDirection
-                      | paginate : { itemsPerPage: 20, currentPage: p }
+                      | paginate : { itemsPerPage: 10, currentPage: p }
                   "
                 >
                   <td>
                     {{ order.customer?.firstName }}
                     {{ order.customer?.lastName }}
                   </td>
-                  <td>{{ order.product?.name }}</td>
-                  <td>{{ order.amount | currency }}</td>
-                  <td>{{ order.status }}</td>
+                  <td><p class="text-xs font-weight-bold mb-0">{{ order.product?.name }}</p></td>
+                  <td><span class="text-secondary text-xs font-weight-bold">{{ order.amount | currency }}</span></td>
+                  <td><p class="text-xs font-weight-bold mb-0">{{ order.status }}</p></td>
                   <td>
                     <div class="d-flex btn-group align-items-end">
                       <button
                         (click)="showSuccess()"
                         [routerLink]="['/orders/edit', order.id]"
-                        class="btn btn-info"
+                        class="btn bg-gradient-success btn-sm"
                       >
                         <i class="fa fa-edit"></i>
                       </button>
-                      <button class="btn delete" (click)="onUpdate(order)">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      <button class="btn bg-gradient-primary btn-sm" (click)="onUpdate(order)">
+                        <i class="fa fa-trash" ></i>
                       </button>
                     </div>
                   </td>
