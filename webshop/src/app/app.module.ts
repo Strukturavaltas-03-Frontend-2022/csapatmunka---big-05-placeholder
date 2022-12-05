@@ -25,6 +25,8 @@ import { ProductListComponent } from './page/product-list/product-list.component
 import { ShortenPipe } from './common/pipes/shorten.pipe';
 import { EditProductComponent } from './page/edit-product/edit-product.component';
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
+import { SumPipe } from './pipe/sum.pipe';
+import { EditOrderComponent } from './page/edit-order/edit-order.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ToggleButtonComponent } from './common/toggle-button/toggle-button.comp
     ShortenPipe,
     EditProductComponent,
     ToggleButtonComponent,
+    SumPipe,
+    EditOrderComponent
   ],
   imports: [
     BrowserModule,
