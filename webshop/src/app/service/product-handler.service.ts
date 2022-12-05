@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { DataObject } from '../common/model/data-object.interface';
 import { Product } from '../common/model/product.model';
 import { ProductService } from './backend/product.service';
@@ -25,6 +26,7 @@ export class ProductHandlerService {
     private productSvc: ProductService,
     private uiService: UiService,
     private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   getProducts() {
@@ -50,6 +52,7 @@ export class ProductHandlerService {
         this.getProducts();
         this.router.navigate(['product-list']);
         this.uiService.loading.next(false);
+        this.showToastrMsg('Product has been created successfully!');
       }),
     ).subscribe();
   }
@@ -61,6 +64,7 @@ export class ProductHandlerService {
         this.getProducts();
         this.router.navigate(['product-list']);
         this.uiService.loading.next(false);
+        this.showToastrMsg('Product has been modified successfully!');
       }),
     ).subscribe();
   };
@@ -75,9 +79,16 @@ export class ProductHandlerService {
           this.router.navigate([currentUrl]);
         });
         this.uiService.loading.next(false);
+        this.showToastrMsg('Product has been deleted successfully!');
       }),
     ).subscribe();
   };
+
+  showToastrMsg(message: string) {
+    this.toastr.success(message, '', {
+      positionClass: 'toast-bottom-center',
+    });
+  }
 
   filterProducts(formEntries: DataObject) {
     this._products.pipe(
