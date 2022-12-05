@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { count, of } from 'rxjs';
 import { Address } from 'src/app/common/model/address';
 import { Customer } from 'src/app/common/model/customer';
 import { AddressService } from 'src/app/service/backend/address.service';
 import { CustomerService } from 'src/app/service/backend/customer.service';
 import { FormField, TableService } from 'src/app/service/tableConfig/table.service';
+import countries from 'src/assets/db/countries.min.json'
 
 
 
@@ -33,16 +35,36 @@ export class EditCustomerComponent {
 
   addressList$ = this.addressService.addressList$
 
-countries = require('/node_modules/country-json/src/country-by-name.json')
+  selectedCountry = new FormControl('')
+
+  cities: String[] = []
+
+//countries = require('/node_modules/country-json/src/country-by-name.json')
+  countries = countries
+
+
+
+
 
   ngOnInit():void{
 
     this.actRoute.params.subscribe(
       params => {
-        this.customerService.get(params['id'])
-        this.addressService.get(params['customerID'])
+        if(params['id'] === '0'){
+          of(new Address(), new Customer())
+        }else{
+          this.customerService.get(params['id'])
+          this.addressService.get(params['customerID'])
+        }
       }
       )
+
+      this.selectedCountry.valueChanges.subscribe(
+        value=>{
+          if(value!== null){
+            this.cities = countries[value as keyof typeof countries]
+          }
+        })
   }
 
   showSuccess() {

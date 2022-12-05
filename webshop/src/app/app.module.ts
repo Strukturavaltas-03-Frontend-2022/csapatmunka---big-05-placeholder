@@ -39,7 +39,7 @@ import { EditProductComponent } from './page/edit-product/edit-product.component
     SpinnerComponent,
     ProductListComponent,
     ShortenPipe,
-    EditProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
