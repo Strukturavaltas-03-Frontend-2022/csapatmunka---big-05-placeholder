@@ -130,7 +130,7 @@
                     <p class="text-xs text-dark font-weight-bold mb-0">{{ product.price }}</p>
                   </td>
                   <td class="product-list__row_actions">
-                    <div class="btn-group d-flex gap-3">
+                    <div class="btn-group d-flex gap-3 justify-content-center">
                       <a class="text-primary" [routerLink]="['/product', product.id]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                       <a class="text-danger" (click)="onDelete(product.id)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
                     </div>
