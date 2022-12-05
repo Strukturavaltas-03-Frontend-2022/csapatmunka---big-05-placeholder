@@ -3,11 +3,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Customer } from 'src/app/common/model/customer';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http'
+import { UiService } from '../common/ui.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
+
+  uiService: UiService = inject(UiService)
 
   apiURL: string = environment.apiURL
 
@@ -30,8 +33,13 @@ export class CustomerService {
   }
 
   getAll():void {
+    this.uiService.loading.next(true);
     this.http.get<Customer[]>(`${this.apiURL}${this.entityName}`).subscribe({
-      next: customers=> this.customerList$.next(customers)
+      next: customers=>{
+        this.customerList$.next(customers)
+        this.uiService.loading.next(false);
+      }
+
     })
   }
 

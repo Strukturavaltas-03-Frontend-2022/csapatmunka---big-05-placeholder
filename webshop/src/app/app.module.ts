@@ -7,8 +7,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IMaskModule } from 'angular-imask';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {NgxPaginationModule} from 'ngx-pagination';
 
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HomeComponent } from './page/home/home.component';
@@ -49,7 +51,9 @@ import { EditProductComponent } from './page/edit-product/edit-product.component
     HttpClientModule,
     OverlayModule,
     IMaskModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

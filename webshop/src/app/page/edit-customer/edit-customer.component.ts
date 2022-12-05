@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Address } from 'src/app/common/model/address';
 import { Customer } from 'src/app/common/model/customer';
 import { AddressService } from 'src/app/service/backend/address.service';
@@ -22,6 +23,8 @@ export class EditCustomerComponent {
 
   addressService: AddressService = inject(AddressService)
 
+  toastr: ToastrService = inject(ToastrService)
+
   tableService: TableService = inject(TableService)
 
   selectedCustomer$ = this.customerService.selectedCustomer$
@@ -33,10 +36,6 @@ export class EditCustomerComponent {
 countries = require('/node_modules/country-json/src/country-by-name.json')
 
   ngOnInit():void{
-    console.log(this.countries);
-
-
-    this.customerService.getAll()
 
     this.actRoute.params.subscribe(
       params => {
@@ -46,11 +45,18 @@ countries = require('/node_modules/country-json/src/country-by-name.json')
       )
   }
 
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
+
   onSaveCustomer(customer: Customer){
+    this.showSuccess()
     this.customerService.update(customer)
   }
 
   onSaveAddress(address: Address){
+    this.showSuccess()
     this.addressService.update(address)
   }
+
 }

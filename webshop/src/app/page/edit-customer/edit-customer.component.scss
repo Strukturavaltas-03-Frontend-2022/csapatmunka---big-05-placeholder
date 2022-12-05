@@ -1,5 +1,5 @@
 form{
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -8,4 +8,12 @@ form{
   height: 1px;
   margin: 2rem auto;
   background-color: rgba(0, 0, 0, 0.293);
+}
+
+input{
+  margin-bottom: 2rem;
+}
+
+select{
+  height: fit-content;
 }
