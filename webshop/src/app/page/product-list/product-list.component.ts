@@ -19,6 +19,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   sortKey = '';
   sortDirection = 1;
   tableColumns: ITableColumn[] = this.tableSvc.productTableColumns;
+  pageSize: number = 50;
+  p: number = 1;
   public productFilter = new FormControl(false);
   public showFilter = new BehaviorSubject<boolean>(false);
   public productListForm: FormGroup;

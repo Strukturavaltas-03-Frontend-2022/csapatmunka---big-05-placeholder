@@ -64,3 +64,10 @@
     }
   }
 }
+
+.my-pagination {
+  font-size: smaller;
+  &::ng-deep .ngx-pagination .current {
+    background: rgb(39, 111, 255);
+  }
+}
