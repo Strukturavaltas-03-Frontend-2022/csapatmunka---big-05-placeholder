@@ -4,58 +4,73 @@
       <h6 class="text-white text-capitalize ps-3">Customers table</h6>
     </div>
   </div>
-<div class="card-body px-0 pb-2 text-center ">
-  <button class="btn btn-info w-80">
-    Add new customer
-  </button>
-  <div class="table-responsive p-0">
-    <table class="table  align-items-center mb-0">
-      <thead>
-        <tr>
-          <th  *ngFor="let col of tableColumns"
-          (click) = "startSort(col.key)"
-           class="table__head text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-            <i *ngIf="col.key === sortKey && sortDirection === 1" class="fa fa-sort-amount-asc" aria-hidden="true"></i>
-            <i *ngIf="col.key === sortKey && sortDirection === -1" class="fa fa-sort-amount-desc" aria-hidden="true"></i>
-            {{ col.title }}</th>
-          <th class="text-secondary opacity-7"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let customer of finalList$ | async | productsort:sortKey:sortDirection">
-          <td>
-            <div class="d-flex  px-2 py-1">
-              <div class="d-flex flex-column justify-content-center">
-                <h6 class="mb-0 text-secondary text-sm">{{customer.firstName }}</h6>
+  <div class="card-body px-0 pb-2 text-center ">
+    <button class="btn btn-info w-80">
+      Add new customer
+    </button>
+    <div class="table-responsive p-0">
+      <table class="table  align-items-center mb-0">
+        <thead>
+          <tr>
+            <th *ngFor="let col of tableColumns" (click)="startSort(col.key)"
+              class="table__head text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+              <i *ngIf="col.key === sortKey && sortDirection === 1" class="fa fa-sort-amount-asc"
+                aria-hidden="true"></i>
+              <i *ngIf="col.key === sortKey && sortDirection === -1" class="fa fa-sort-amount-desc"
+                aria-hidden="true"></i>
+              {{ col.title }}
+            </th>
+            <th class="text-secondary opacity-7"></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="finalList$ | async">
+          <tr
+            *ngFor="let customer of customerList$ | async | productsort:sortKey:sortDirection | paginate: {itemsPerPage: 50, currentPage: p}">
+            <td>
+              <div class="d-flex  px-2 py-1">
+                <div class="d-flex flex-column justify-content-center">
+                  <h6 class="mb-0 text-secondary text-sm">{{customer.firstName }}</h6>
+                </div>
               </div>
-            </div>
-          </td>
-          <td class="align-middle text-center text-sm">
-            <div class="d-flex px-2 py-1">
-             <p class="text-xs  mb-0">{{ customer.lastName }}</p>
-            </div>
-          </td>
-          <td>
-            <p class="text-xs mb-0">{{ customer.email}}</p>
-          </td>
-          <td class="align-middle text-center text-sm">
-            <p class="text-xs font-weight-bold mb-0">{{ customer.address?.country}}, {{ customer.address?.city }}  </p>
-            <p class="text-xs text-secondary mb-0">{{ customer.address?.street }} Street</p>
-          </td>
-          <td class="align-middle text-center text-sm">
-            <span class="badge badge-sm bg-gradient-success">{{customer.active}}</span>
-          </td>
-          <td class="align-middle text-center text-sm">
-            <p class="text-xs font-weight-bold mb-0">{{ customer.id }}</p>
-          </td>
-          <td class="align-middle">
-            <div class="btn-group d-flex gap-3">
-              <a class="text-primary" [routerLink]="['/customers/edit', customer.id, customer.address?.customerID]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-              <a class="text-danger" (click)="onDelete(customer.id)"> <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> </a>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+            <td class="align-middle text-center text-sm">
+              <div class="d-flex px-2 py-1">
+                <p class="text-xs  mb-0">{{ customer.lastName }}</p>
+              </div>
+            </td>
+            <td>
+              <p class="text-xs mb-0">{{ customer.email}}</p>
+            </td>
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0">{{ customer.address?.country}}, {{ customer.address?.city }} </p>
+              <p class="text-xs text-secondary mb-0">{{ customer.address?.street }} Street</p>
+            </td>
+            <td class="align-middle text-center text-sm">
+              <span *ngIf="customer.active" class="badge badge-sm bg-gradient-success">{{customer.active}}</span>
+              <span *ngIf="!customer.active" class="badge badge-sm bg-gradient-danger">{{customer.active}}</span>
+            </td>
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0" >{{ customer.id }}</p>
+            </td>
+            <td class="align-middle">
+              <div class="btn-group d-flex gap-3">
+                <a class="text-primary" [routerLink]="['/customers/edit', customer.id, customer.address?.customerID]"><i
+                    class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a class="text-danger" (click)="onDelete(customer.id)"> <i class="fa fa-trash-o fa-lg"
+                    aria-hidden="true"></i> </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center col-12 mt-4 mx-auto">
+        <style>
+          .my-pagination /deep/ .ngx-pagination .current {
+            background: rgb(39, 111, 255);
+          }
+        </style>
+        <pagination-controls class=" my-pagination" (pageChange)="p = $event" previousLabel="Előző" nextLabel="Következő">
+        </pagination-controls>
+      </div>
+    </div>
   </div>
-</div>
