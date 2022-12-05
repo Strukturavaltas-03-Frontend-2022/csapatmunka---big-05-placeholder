@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { combineLatest, map } from 'rxjs';
 import { Order } from 'src/app/common/model/order';
 import { CategoryService } from 'src/app/service/backend/category.service';
@@ -7,14 +8,12 @@ import { OrderService } from 'src/app/service/backend/order.service';
 import { ProductService } from 'src/app/service/backend/product.service';
 import { TableService } from 'src/app/service/tableConfig/table.service';
 
-
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent {
-
   service: OrderService = inject(OrderService);
 
   prodService: ProductService = inject(ProductService);
@@ -25,34 +24,42 @@ export class OrderComponent {
 
   cols = this.config.orderTableColumns;
 
+  toastr: ToastrService = inject(ToastrService);
+
+  p: number = 1;
+
   sortKey = '';
   sortDirection = 1;
 
-  list = combineLatest({
+  list$ = combineLatest({
     prod: this.prodService.getAll(),
     //cust: this.custService.getAll(),
     ord: this.service.getAll(),
   }).pipe(
-    map( result => result.ord.map( function (order) {
-        order.product = result.prod.find(p => p.id === order.productID);
+    map((result) =>
+      result.ord.map(function (order) {
+        order.product = result.prod.find((p) => p.id === order.productID);
         //customer = result.cust.find( c => c.id === order.customerID )
         return order;
-      }) )
-  )
+      })
+    )
+  );
 
   startSort(key: string): void {
     if (key === this.sortKey) {
-      this.sortDirection *= -1
+      this.sortDirection *= -1;
     } else {
-      this.sortDirection = 1
+      this.sortDirection = 1;
     }
 
-    this.sortKey = key
+    this.sortKey = key;
   }
   onUpdate(order: Order): void {
-    delete order.product
-
+    delete order.product;
   }
-
-
+  showSuccess() {
+    this.toastr.info('Are you sure?', 'Edit', {
+      timeOut: 3000,
+    });
+  }
 }
