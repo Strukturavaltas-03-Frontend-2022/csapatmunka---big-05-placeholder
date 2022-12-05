@@ -14,17 +14,14 @@ import { TableService } from 'src/app/service/tableConfig/table.service';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent {
-  service: OrderService = inject(OrderService);
-
-  prodService: ProductService = inject(ProductService);
-
-  custService: CustomerService = inject(CustomerService);
-
+  orderService: OrderService = inject(OrderService);
+  productService: ProductService = inject(ProductService);
+  customerService: CustomerService = inject(CustomerService);
   config: TableService = inject(TableService);
+  toastrService: ToastrService = inject(ToastrService);
+
 
   cols = this.config.orderTableColumns;
-
-  toastr: ToastrService = inject(ToastrService);
 
   p: number = 1;
 
@@ -32,9 +29,9 @@ export class OrderComponent {
   sortDirection = 1;
 
   list$ = combineLatest({
-    prod: this.prodService.getAll(),
-    //cust: this.custService.getAll(),
-    ord: this.service.getAll(),
+    prod: this.productService.getAll(),
+    //cust: this.customerService.getAll(),
+    ord: this.orderService.getAll(),
   }).pipe(
     map((result) =>
       result.ord.map(function (order) {
@@ -54,11 +51,13 @@ export class OrderComponent {
 
     this.sortKey = key;
   }
+
   onUpdate(order: Order): void {
     delete order.product;
   }
+
   showSuccess() {
-    this.toastr.info('Are you sure?', 'Edit', {
+    this.toastrService.info('Are you sure?', 'Edit', {
       timeOut: 3000,
     });
   }

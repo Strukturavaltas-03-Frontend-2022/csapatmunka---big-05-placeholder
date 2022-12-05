@@ -40,6 +40,7 @@
                     type="text"
                     class="form-control"
                     required
+                    pattern="^[A-Ű][A-Űa-Ű .]{4,24}$"
                   >
                   <div *ngIf="orderEditorForm.controls['customer']?.invalid" class="error-message">
                     Invalid!
@@ -53,6 +54,7 @@
                     type="text"
                     class="form-control"
                     required
+                    pattern="^[A-Ű][A-Űa-Ű .]{4,24}$"
                     product
                   >
                   <div *ngIf="orderEditorForm.controls['product']?.invalid" class="error-message">
@@ -67,6 +69,7 @@
                     type="text"
                     class="form-control"
                     required
+                    pattern="^{1,24}$"
                   >
                   <div *ngIf="orderEditorForm.controls['amount']?.invalid" class="error-message">
                     Invalid!
@@ -80,18 +83,15 @@
                     type="text"
                     class="form-control"
                     required
+                    pattern="^[A-Ű][A-Űa-Ű .]{2,24}$"
                   >
                   <div *ngIf="orderEditorForm.controls['status']?.invalid" class="error-message">
                     Invalid!
                   </div>
                 </div>
-                <div class="d-grid gap-2 mt-3">
-                  <button
-                    [disabled]="orderEditorForm.invalid"
-                    class="btn btn-primary"
-                    type="submit"
-                  >
-                    <i class="fa fa-save"></i> update order </button>
+
+                <div class="text-center">
+                  <button [disabled]="orderEditorForm.invalid" type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2"><i class="fa fa-save"></i>update order</button>
                 </div>
               </form>
             </div>
@@ -256,4 +256,5 @@
   </div>
 </main>
 -->
+
 
