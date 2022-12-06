@@ -1,0 +1,50 @@
+<div class="card my-4">
+  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+      <h6 class="text-white text-capitalize ps-3">Bills</h6>
+    </div>
+  </div>
+  <div class="card-body px-0 pb-2 text-center ">
+    <button  [routerLink]="['bills/edit/']" class="btn btn-info w-80">
+      New Bill
+    </button>
+    <div class="table-responsive p-0">
+      <table class="table  align-items-center mb-0">
+    <thead>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.title }}
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let row of billList$ | async">
+          <td *ngFor="let col of columns">
+            {{ row[col.key] }}
+          </td>
+          <td>
+            <div class="btn-group gap-1">
+              <button [routerLink]="['/bills/edit', row.id]" class="btn btn-info">
+                <i class="fa fa-edit"></i>
+              </button>
+
+
+
+              <button  class="btn btn-danger"  >
+                <i class="fa fa-trash"></i>
+              </button>
+
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+
+
