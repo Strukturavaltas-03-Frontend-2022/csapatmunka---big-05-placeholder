@@ -7,6 +7,10 @@
 <div *ngIf="selectedCustomer$ | async as customer" class="p-4">
   <form action="" #customerEditor="ngForm">
     <div class="form-group">
+      <label for="id">ID:</label>
+      <input type="number" id="id" name="id" class="form-control" disabled [(ngModel)]="customer.id">
+    </div>
+    <div class="form-group">
       <label for="firstName">First name:</label>
       <input id="firstName" name="firstName" class="form-control" type="text"
       [(ngModel)]="customer.firstName" pattern="^[A-Ű][A-Űa-ű .]{2,20}$" required>
@@ -47,9 +51,15 @@
     </div>
     <div class="line"></div>
   </form>
-
+</div>
 <div class="row" *ngIf="selectedAddress$ | async as address">
-  <form action="" #addressEditor="ngForm" (ngSubmit)="onSaveAddress(address)">
+  <form action="" #addressEditor="ngForm" (ngSubmit)="onSaveBoth()">
+    <div class="form-group d-flex gap-2">
+      <label for="id">CustomerID</label>
+      <input type="number" id="customerID" name="customerID" class="form-control mb-4" [(ngModel)]="address.customerID">
+      <label for="id">Address ID</label>
+      <input type="number" id="id" name="id" class="form-control mb-4" disabled [(ngModel)]="address.id">
+    </div>
       <div class="form-group d-flex gap-2">
         <label for="zip">ZIP:</label>
         <input id="zip" name="zip" class="form-control " type="text" [(ngModel)]="address.zip">
@@ -61,14 +71,6 @@
         <select class="form-select " name="city" id="city" [(ngModel)]="address.city">
           <option *ngFor="let city of cities" [value]="city" >{{city}}</option>
         </select>
-       <!--  <input id="city" name="city" class="form-control d-inline-block" type="text" [(ngModel)]="address.city"
-        required pattern="^[A-Ű][A-Űa-ű .]{2,30}$"> -->
-      </div>
-      <div
-      [ngStyle]="{visibility: addressEditor.controls['city'].invalid &&
-      !addressEditor.controls['city'].pristine ? 'visible': 'hidden' }"
-      class="text-danger">
-        Type your city!
       </div>
       <div class="form-group">
         <label for="street">Street:</label>
@@ -95,10 +97,11 @@
   </button>
   <button
     class="btn btn-success text-capitalize"
-    (click)="onSaveCustomer(customer)">
+    (click)="onSaveBoth()">
     <i class="fa fa-save"></i>
     Save
   </button>
 </div>
-  </div>
+
 </div>
+

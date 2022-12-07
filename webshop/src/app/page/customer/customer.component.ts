@@ -42,28 +42,13 @@ export class CustomerComponent {
   getMergedData(): void {
     this.finalList$ = this.customerList$.pipe(combineLatestWith(this.addressList$),
       map(([customer, address]) => customer.map(customer => {
-        customer.address = address.find(a => a.customerID === customer.id)
+        customer.address = address.find(a => a.id === customer.id)
       })))
-
   }
-
-  /* getMergedData():void{
-    this.finalList$ = combineLatest({
-      customer: this.customerList$,
-      address: this.addressList$
-    }).pipe(
-      map( result => result.customer.map( customer =>{
-        customer.address = result.address.find(a => a.customerID === customer.id)
-        return customer
-      }))
-    )
-  }
-   */
 
   constructor() {
     this.getMergedData()
-
-  }
+      }
 
   startSort(key: string): void {
     if (key === this.sortKey) {

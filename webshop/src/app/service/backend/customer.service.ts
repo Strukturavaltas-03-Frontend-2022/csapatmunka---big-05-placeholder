@@ -59,12 +59,15 @@ export class CustomerService {
 
   update(customer: Customer):void {
     this.http.patch<Customer>(`${this.apiURL}${this.entityName}/${customer.id}`, customer).subscribe({
-      next: customer => {
+      next: () => {
+        this.getAll()
+      }
+  /*     next: customer => {
         const itemIndex = this.getCachedItemIndexById(customer.id)
         if( itemIndex > -1){
           this.customerList$.getValue().splice(itemIndex, 0, customer)
         }
-      }
+      } */
     })
   }
 
@@ -89,7 +92,10 @@ export class CustomerService {
 
   add(customer: Customer): void{
     this.http.post<Customer[]>(`${this.apiURL}${this.entityName}`,customer).subscribe({
-      next: (customerList) => this.customerList$.getValue().push(customer)
+      next: () => {
+        this.getAll()
+      }
+      /* next: (customerList) => this.customerList$.getValue().push(customer) */
     })
   }
 
