@@ -32,7 +32,18 @@ export class BillComponent {
 
   billList$: Observable<Bill[]> = this.billService.getAll();
 
+  sortKey: string = '';
+  sortDirection: number =1;
 
+  startSort(key: string): void {
+    if (key === this.sortKey) {
+      this.sortDirection *= -1
+    } else {
+      this.sortDirection = 1
+    }
+
+    this.sortKey = key
+  }
 
   onDelete(bill: Bill): void {
     this.billService.delete(bill).subscribe(
