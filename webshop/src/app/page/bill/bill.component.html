@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="card-body px-0 pb-2 text-center ">
-    <button  [routerLink]="['bills/edit/']" class="btn btn-info w-80">
+    <button [routerLink]="['/bills/edit']"  class="btn btn-info w-80">
       New Bill
     </button>
     <div class="table-responsive p-0">
@@ -19,30 +19,40 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody *ngIf="billList$ | async as list">
         <tr *ngFor="let row of billList$ | async">
           <td *ngFor="let col of columns">
             {{ row[col.key] }}
           </td>
           <td>
             <div class="btn-group gap-1">
-              <button [routerLink]="['/bills/edit', row.id]" class="btn btn-info">
+              <button (click)="showSuccess()" [routerLink]="['/bills/edit', row.id]" class="btn btn-info">
                 <i class="fa fa-edit"></i>
               </button>
 
 
-
-              <button  class="btn btn-danger"  >
+              <div class="btn-group">
+              <button (click)="onDelete(row)" class="btn btn-danger"  >
                 <i class="fa fa-trash"></i>
               </button>
-
+            </div>
 
             </div>
           </td>
         </tr>
+
+
+    <tr class="table__tr--sum">
+        <td>{{ '' }}</td>
+        <td>{{'' }}</td>
+        <td>{{ list | sum:'amount' }}</td>
+        <td>{{ '' }}</td>
+    </tr>
       </tbody>
 
     </table>
+
+
   </div>
 </div>
 
