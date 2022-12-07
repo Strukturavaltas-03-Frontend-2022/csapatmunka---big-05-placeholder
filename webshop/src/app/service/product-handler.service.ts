@@ -85,9 +85,7 @@ export class ProductHandlerService {
   };
 
   showToastrMsg(message: string) {
-    this.toastr.success(message, '', {
-      positionClass: 'toast-bottom-center',
-    });
+    this.toastr.success(message, '');
   }
 
   filterProducts(formEntries: DataObject) {
