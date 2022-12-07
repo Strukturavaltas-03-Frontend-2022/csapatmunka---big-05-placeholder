@@ -50,6 +50,7 @@ import { EditBillComponent } from './page/edit-bill/edit-bill.component';
     EditOrderComponent,
     BillComponent,
     EditBillComponent
+
   ],
   imports: [
     BrowserModule,
