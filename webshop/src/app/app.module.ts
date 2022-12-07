@@ -29,6 +29,7 @@ import { SumPipe } from './pipe/sum.pipe';
 import { EditOrderComponent } from './page/edit-order/edit-order.component';
 import { BillComponent } from './page/bill/bill.component';
 import { EditBillComponent } from './page/edit-bill/edit-bill.component';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { EditBillComponent } from './page/edit-bill/edit-bill.component';
     SumPipe,
     EditOrderComponent,
     BillComponent,
-    EditBillComponent
+    EditBillComponent,
+    FilterPipe
 
   ],
   imports: [

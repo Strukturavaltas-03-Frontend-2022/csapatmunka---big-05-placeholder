@@ -1,4 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, combineLatestWith, map, Observable, Subject } from 'rxjs';
 import { Address } from 'src/app/common/model/address';
@@ -6,7 +7,7 @@ import { Customer } from 'src/app/common/model/customer';
 import { AddressService } from 'src/app/service/backend/address.service';
 import { CustomerService } from 'src/app/service/backend/customer.service';
 import { UiService } from 'src/app/service/common/ui.service';
-import { TableService, ITableColumn } from 'src/app/service/tableConfig/table.service';
+import { TableService, ITableColumn, CustomerFilter } from 'src/app/service/tableConfig/table.service';
 
 @Component({
   selector: 'app-customer',
@@ -39,6 +40,16 @@ export class CustomerComponent {
 
   p: number = 1;
 
+  filterable: boolean = false
+
+  selectedOption = new FormControl('')
+
+  selectedFilter: string = ''
+
+  searchPhrase: string = ''
+
+  options: CustomerFilter[] = this.configTable.customerFilterEditorFields
+
   getMergedData(): void {
     this.finalList$ = this.customerList$.pipe(combineLatestWith(this.addressList$),
       map(([customer, address]) => customer.map(customer => {
@@ -48,7 +59,9 @@ export class CustomerComponent {
 
   constructor() {
     this.getMergedData()
-      }
+    this.selectedOption.valueChanges.subscribe(value=> this.selectedFilter=String(value)
+    )
+  }
 
   startSort(key: string): void {
     if (key === this.sortKey) {
@@ -58,6 +71,7 @@ export class CustomerComponent {
     }
     this.sortKey = key
   }
+
 
   showSuccess() {
     this.toastr.success('Általad kiválasztott elem sikeresen törölve lett az adatbázisból!', 'Törölve!');
