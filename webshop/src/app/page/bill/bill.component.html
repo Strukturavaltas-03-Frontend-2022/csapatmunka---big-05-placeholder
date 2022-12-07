@@ -12,7 +12,10 @@
       <table class="table  align-items-center mb-0">
     <thead>
         <tr>
-          <th *ngFor="let col of columns">
+          <th (click)="startSort(col.key)"
+          *ngFor="let col of columns">
+            <i *ngIf="col.key === sortKey && sortDirection === -1" class="fa fa-sort-amount-desc"></i>
+            <i *ngIf="col.key === sortKey && sortDirection === 1" class="fa fa-sort-amount-asc"></i>
             {{ col.title }}
           </th>
           <th></th>
@@ -20,7 +23,7 @@
       </thead>
 
       <tbody *ngIf="billList$ | async as list">
-        <tr *ngFor="let row of billList$ | async">
+        <tr *ngFor="let row of billList$ | async | productsort:sortKey:sortDirection">
           <td *ngFor="let col of columns">
             {{ row[col.key] }}
           </td>
