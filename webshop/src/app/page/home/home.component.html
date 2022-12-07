@@ -31,8 +31,8 @@
             <i class="fa fa-user" aria-hidden="true"></i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Customers</p>
-            <h4 class="mb-0">2,300</h4>
+            <p class="text-sm mb-0 text-capitalize">Customers Total</p>
+            <h4 class="mb-0">{{ (customerList$ | async)?.length }}</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -48,8 +48,8 @@
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Orders</p>
-            <h4 class="mb-0">3,462</h4>
+            <p class="text-sm mb-0 text-capitalize">Orders Total</p>
+            <h4 class="mb-0">{{ (orderList$ | async)?.length }}</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -65,8 +65,8 @@
             <i class="fa fa-credit-card" aria-hidden="true"></i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Bills</p>
-            <h4 class="mb-0">$103,430</h4>
+            <p class="text-sm mb-0 text-capitalize">Bills Total</p>
+            <h4 class="mb-0">{{ (billList$ | async)?.length }}</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">
