@@ -11,6 +11,7 @@ let instanceCounter = 0;
 export class ToggleButtonComponent implements AfterViewInit {
   public instance = ++instanceCounter;
 
+  @Input() label = '';
   @Input() accessorName = '';
   @Input() ownFormControl = new FormControl();
   @Output() checked: EventEmitter<any> = new EventEmitter();

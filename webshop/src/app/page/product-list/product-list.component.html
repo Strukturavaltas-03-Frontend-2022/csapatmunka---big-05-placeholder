@@ -10,6 +10,7 @@
         <div class="card-body px-0 pb-2">
           <div class="px-3">
             <app-toggle-button
+              label="Filter"
               accessorName="productFilter"
               [ownFormControl]="productFilter"
               (checked)="switchFilter($event)"
@@ -100,7 +101,7 @@
                   <th
                     *ngFor="let col of tableColumns"
                     (click)="startSort(col.key)"
-                    class="product-list__table_head text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    class="product-list__table_head text-uppercase text-dark text-xxs font-weight-bolder opacity-7"
                   >
                     <i *ngIf="col.key === sortKey && sortDirection === 1" class="fa fa-sort-amount-asc" aria-hidden="true"></i>
                     <i *ngIf="col.key === sortKey && sortDirection === -1" class="fa fa-sort-amount-desc" aria-hidden="true"></i>
@@ -110,26 +111,26 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let product of (products | async) | productsort:sortKey:sortDirection">
+                <tr *ngFor="let product of (products | async) | productsort:sortKey:sortDirection | paginate: {itemsPerPage: pageSize, currentPage: p}">
                   <td class="product-list__row_name">
                     <div class="d-flex px-2 py-1">
-                      <p class="text-xs font-weight-bold mb-0">{{ product.name }}</p>
+                      <p class="text-xs text-dark font-weight-bold mb-0">{{ product.name }}</p>
                     </div>
                   </td>
                   <td class="product-list__row_type">
-                    <p class="text-xs text-secondary mb-0">{{ product.type }}</p>
+                    <p class="text-xs text-dark mb-0">{{ product.type }}</p>
                   </td>
                   <td class="product-list__row_category">
-                    <span class="text-xs text-secondary mb-0">{{ (categories | async)?.length ? (categories | async)?.[product.catID - 1]?.name : '' }}</span>
+                    <span class="text-xs text-dark font-weight-bold mb-0">{{ product.category }}</span>
                   </td>
                   <td class="product-list__row_description">
-                    <p class="text-xs text-secondary mb-0">{{ product.description | shorten }}</p>
+                    <p class="text-xs text-dark mb-0">{{ product.description | shorten }}</p>
                   </td>
                   <td class="product-list__row_price">
-                    <p class="text-xs text-secondary mb-0">{{ product.price }}</p>
+                    <p class="text-xs text-dark font-weight-bold mb-0">{{ product.price }}</p>
                   </td>
                   <td class="product-list__row_actions">
-                    <div class="btn-group d-flex gap-3">
+                    <div class="btn-group d-flex gap-3 justify-content-center">
                       <a class="text-primary" [routerLink]="['/product', product.id]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                       <a class="text-danger" (click)="onDelete(product.id)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
                     </div>
@@ -137,6 +138,10 @@
                 </tr>
               </tbody>
             </table>
+            <div class="d-flex justify-content-center col-12 mt-4 mx-auto">
+              <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Previous" nextLabel="Next">
+              </pagination-controls>
+            </div>
           </div>
         </div>
       </div>

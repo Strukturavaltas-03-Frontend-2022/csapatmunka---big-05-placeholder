@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, map, Observable, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, Subscription, tap } from 'rxjs';
 import { priceMask } from 'src/app/common/masks';
 import { DataObject } from 'src/app/common/model/data-object.interface';
 import { Product } from 'src/app/common/model/product.model';
@@ -14,16 +14,24 @@ import { TableService, ITableColumn } from 'src/app/service/tableConfig/table.se
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
-  products: Observable<Product[]>;
-  categories = this.categorySvc.categories;
-  sortKey = '';
-  sortDirection = 1;
-  tableColumns: ITableColumn[] = this.tableSvc.productTableColumns;
+  public products = new BehaviorSubject<Product[]>([]);
+  public categories = this.categorySvc.categories;
+  public sortKey = '';
+  public sortDirection = 1;
+  public tableColumns: ITableColumn[] = this.tableSvc.productTableColumns;
+  public pageSize: number = 50;
+  public p: number = 1;
   public productFilter = new FormControl(false);
   public showFilter = new BehaviorSubject<boolean>(false);
   public productListForm: FormGroup;
   public priceMask = priceMask;
+  public compareFns = {
+    catID: (a: Product, b: Product) => {
 
+    }
+  }
+
+  private productsMappingSubsription: Subscription;
   private showFilterSubscription: Subscription | undefined;
 
   constructor(
@@ -33,7 +41,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
   ) {
     this.productHandlerSvc.getProducts();
-    this.products = this.productHandlerSvc.filteredProducts;
+    this.productsMappingSubsription =
+      combineLatest([this.productHandlerSvc.filteredProducts, this.categorySvc.categories])
+        .pipe(
+          tap(([products, categories]) => {
+            this.products.next(
+              products.map(product => {
+                return { ...product, category: categories[product.catID - 1].name }
+              })
+            );
+          })
+        ).subscribe();
     this.productListForm = this.fb.group({
       name: [undefined, [Validators.minLength]],
       type: [undefined, [Validators.minLength]],
@@ -58,6 +76,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.productsMappingSubsription?.unsubscribe();
     this.showFilterSubscription?.unsubscribe();
   }
 

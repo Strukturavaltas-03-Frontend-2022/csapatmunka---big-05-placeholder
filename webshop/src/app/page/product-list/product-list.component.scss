@@ -53,6 +53,7 @@
 
     &_price {
       width: 10%;
+      text-align: right;
     }
 
     &_actions {
@@ -62,5 +63,12 @@
         cursor: pointer;
       }
     }
+  }
+}
+
+.my-pagination {
+  font-size: smaller;
+  &::ng-deep .ngx-pagination .current {
+    background: rgb(39, 111, 255);
   }
 }
