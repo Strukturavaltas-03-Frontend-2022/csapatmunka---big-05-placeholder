@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BillComponent } from './page/bill/bill.component';
 import { CustomerComponent } from './page/customer/customer.component';
+import { EditBillComponent } from './page/edit-bill/edit-bill.component';
 import { EditCustomerComponent } from './page/edit-customer/edit-customer.component';
+import { EditOrderComponent } from './page/edit-order/edit-order.component';
 import { EditProductComponent } from './page/edit-product/edit-product.component';
 import { HomeComponent } from './page/home/home.component';
+import { OrderComponent } from './page/order/order.component';
 import { ProductListComponent } from './page/product-list/product-list.component';
 
 const routes: Routes = [
@@ -26,6 +30,22 @@ const routes: Routes = [
   {
     path: 'customers/edit/:id/:customerID',
     component: EditCustomerComponent
+  },
+  {
+    path: 'orders',
+    component: OrderComponent,
+  },
+  {
+    path: 'orders/edit/:id',
+    component: EditOrderComponent
+  },
+  {
+    path: 'bills',
+    component: BillComponent
+  },
+  {
+    path: 'bills/edit/:id',
+    component: EditBillComponent
   },
   {
     path: '**',

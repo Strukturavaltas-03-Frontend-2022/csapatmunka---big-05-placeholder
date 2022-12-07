@@ -1,0 +1,67 @@
+<div
+  class="row mt-3"
+  *ngIf="bill$ | async as bill"
+>
+  <div class="col-12">
+    <form
+      #editBillForm="ngForm"
+      (ngSubmit)="onUpdate(bill)"
+      style="max-width: 400px;"
+      class="mx-auto"
+    >
+      <div class="form-group">
+        <label>OrderID</label>
+        <input
+        orderID="orderID"
+          [(ngModel)]="bill.orderID"
+          type=input
+          class="form-control"
+          pattern="{1,5}"
+          required
+        >
+        <div *ngIf="editBillForm.controls['orderID']?.invalid" class="error-message">
+         OrderId is a number!
+        </div>
+
+
+      </div>
+      <div class="form-group">
+        <label>Amount</label>
+        <input
+        name="amount"
+          [(ngModel)]="bill.amount"
+          type=input
+          class="form-control"
+          pattern="{1,50}"
+          required
+
+        >
+        <div *ngIf="editBillForm.controls['amount']?.invalid" class="error-message">
+          {{ bill.amount }} is not a valid amount!
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <input
+          name="status"
+          [(ngModel)]="bill.status"
+          type="text"
+          class="form-control"
+          required
+        >
+        <div *ngIf="editBillForm.controls['status']?.invalid" class="error-message">
+      Invalid!
+        </div>
+      </div>
+      <div class="d-grid gap-2 mt-3">
+        <button
+          [disabled]="editBillForm.invalid"
+          class="btn btn-primary"
+          type="submit"
+        >
+          <i class="fa fa-save"></i> update bill </button>
+      </div>
+    </form>
+  </div>
+</div>
+

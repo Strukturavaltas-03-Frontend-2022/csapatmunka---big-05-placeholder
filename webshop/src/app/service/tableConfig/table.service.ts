@@ -43,6 +43,13 @@ export class TableService {
     {title: 'Status', key: 'status'},
   ];
 
+  billTableColumns: ITableColumn[] =[
+    {title:'ID', key:'id'},
+    {title:'OrderID', key:'orderID'},
+    {title:'Amount', key:'amount'},
+    {title:'Status', key:'status'},
+  ]
+
 
   constructor() { }
 }

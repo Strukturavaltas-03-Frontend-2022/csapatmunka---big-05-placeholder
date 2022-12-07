@@ -1,0 +1,7 @@
+<div [id]="'toggle-button-' + instance" class="toggle-button">
+  <label class="toggle-button__label-input">
+    <input type="checkbox" [name]="accessorName" [formControl]="ownFormControl" (change)="onChange($event)">
+    <span class="toggle-button__label-input_slider"></span>
+  </label>
+  <label class="toggle-button__label" [innerText]="label"></label>
+</div>
