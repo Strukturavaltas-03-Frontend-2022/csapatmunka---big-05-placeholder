@@ -10,9 +10,11 @@ import {
   ApexResponsive,
   ApexChart
 } from "ng-apexcharts";
-import { combineLatest } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { Data } from '@angular/router';
 import { NumberSymbol } from '@angular/common';
+import { Category } from 'src/app/common/model/category.model';
+import { CategoryService } from 'src/app/service/backend/category.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -28,15 +30,36 @@ export type ChartOptions = {
 })
 export class HomeComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions: any
+  public chartOptions: any;
+  public productChartOptions: any;
 
   public productsInfo = this.productHandlerSvc.getProductsInfo();
   public customerList$ = this.customerSvc.customerList$;
   public orderList$ = this.orderSvc.getAll();
   public billList$ = this.billSvc.getAll();
 
+  private categoryList: Category[] = [];
+
+  catDataSource$ = combineLatest({
+    products: this.productHandlerSvc.products,
+    categories: this.categorySvc.categories,
+  }).pipe(
+    map( data => {
+      this.categoryList = data.categories;
+      const catList: {[x: string]: any} = {};
+      data.products.forEach( product => {
+        if (!catList[product.catID]) {
+          catList[product.catID] = 0;
+        }
+        catList[product.catID]++;
+      });
+      return catList;
+    }),
+  );
+
   constructor(
     private productHandlerSvc: ProductHandlerService,
+    private categorySvc: CategoryService,
     private customerSvc: CustomerService,
     private orderSvc: OrderService,
     private billSvc: BillService) {
@@ -75,6 +98,42 @@ export class HomeComponent implements OnInit {
       chartSettings.series=dataNumbers
       this.chartOptions=chartSettings
     })
-  }
 
+    const productChartSettings = {
+      series: [50,50],
+      chart: {
+        width: 380,
+        type: "pie",
+        foreColor: 'white'
+      },
+      labels: [""],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom",
+            }
+          }
+        }
+      ]
+    };
+
+    this.catDataSource$.subscribe(
+      data => {
+        productChartSettings.series = Object.values(data);
+        productChartSettings.labels = Object.keys(data).map( k => {
+          const cat = this.categoryList.find( c => c.id === Number(k) );
+          if (cat) {
+            return cat.name;
+          }
+          return k;
+        });
+        this.productChartOptions = productChartSettings;
+      }
+    );
+  }
 }
