@@ -3,7 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@angular/cdk/overlay'
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IMaskModule } from 'angular-imask';
@@ -26,17 +26,9 @@ import { ShortenPipe } from './common/pipes/shorten.pipe';
 import { EditProductComponent } from './page/edit-product/edit-product.component';
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
 import { SumPipe } from './pipe/sum.pipe';
-
-
 import { EditOrderComponent } from './page/edit-order/edit-order.component';
-
 import { BillComponent } from './page/bill/bill.component';
-
-
 import { EditBillComponent } from './page/edit-bill/edit-bill.component';
-
-
-
 import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
@@ -61,6 +53,7 @@ import { FilterPipe } from './pipe/filter.pipe';
     EditBillComponent,
     FilterPipe,
 
+
   ],
   imports: [
     BrowserModule,
@@ -74,7 +67,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     IMaskModule,
     MatAutocompleteModule,
     ToastrModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
