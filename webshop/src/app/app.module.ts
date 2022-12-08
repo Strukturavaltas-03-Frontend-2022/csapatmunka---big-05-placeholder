@@ -32,6 +32,7 @@ import { BillComponent } from './page/bill/bill.component';
 
 
 import { EditBillComponent } from './page/edit-bill/edit-bill.component';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,8 @@ import { EditBillComponent } from './page/edit-bill/edit-bill.component';
     EditOrderComponent,
     BillComponent,
     EditBillComponent,
+    FilterPipe
+
 
   ],
   imports: [

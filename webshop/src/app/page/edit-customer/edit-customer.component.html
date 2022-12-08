@@ -7,37 +7,82 @@
 <div *ngIf="selectedCustomer$ | async as customer" class="p-4">
   <form action="" #customerEditor="ngForm">
     <div class="form-group">
+      <label for="id">ID:</label>
+      <input type="number" id="id" name="id" class="form-control" disabled [(ngModel)]="customer.id">
+    </div>
+    <div class="form-group">
       <label for="firstName">First name:</label>
-      <input id="firstName" name="firstName" class="form-control" type="text" [(ngModel)]="customer.firstName">
+      <input id="firstName" name="firstName" class="form-control" type="text"
+      [(ngModel)]="customer.firstName" pattern="^[A-Ű][A-Űa-ű .]{2,20}$" required>
+    </div>
+    <div
+    [ngStyle]="{visibility: customerEditor.controls['firstName'].invalid &&
+    !customerEditor.controls['firstName'].pristine ? 'visible': 'hidden' }"
+    class="text-danger">
+      Name must be at least 3 character and start with upper case!
     </div>
     <div class="form-group">
       <label for="lastName">Last name:</label>
-      <input id="lastName" name="lastName" class="form-control" type="text" [(ngModel)]="customer.lastName">
+      <input id="lastName" name="lastName" class="form-control" type="text" [(ngModel)]="customer.lastName"
+      pattern="^[A-Ű][A-Űa-ű .]{2,20}$" required>
+    </div>
+    <div
+    [ngStyle]="{visibility: customerEditor.controls['lastName'].invalid &&
+    !customerEditor.controls['lastName'].pristine ? 'visible': 'hidden' }"
+    class="text-danger">
+      Name must be at least 3 character and start with upper case!
     </div>
     <div class="form-group">
       <label for="email">Email:</label>
-      <input id="email" name="email" class="form-control" type="text" [(ngModel)]="customer.email">
+      <input id="email" name="email" class="form-control" type="text" [(ngModel)]="customer.email" email required>
+    </div>
+    <div
+    [ngStyle]="{visibility: customerEditor.controls['email'].invalid &&
+    !customerEditor.controls['email'].pristine ? 'visible': 'hidden' }"
+    class="text-danger">
+      {{customerEditor.controls['email'].value}} is not an e-mail address.
+    </div>
+    <div class="form-check p-0">
+      <input id="active" name="active" class="form-check-input" type="checkbox" [checked]="customer.active"
+      [(ngModel)]="customer.active">
+      <label class="form-check-label" for="active">
+        Active
+      </label>
     </div>
     <div class="line"></div>
   </form>
-
+</div>
 <div class="row" *ngIf="selectedAddress$ | async as address">
-  <form action="" #addressEditor="ngForm" (ngSubmit)="onSaveAddress(address)">
+  <form action="" #addressEditor="ngForm" (ngSubmit)="onSaveBoth()">
+    <div class="form-group d-flex gap-2">
+      <label for="id">CustomerID</label>
+      <input type="number" id="customerID" name="customerID" class="form-control mb-4" [(ngModel)]="address.customerID">
+      <label for="id">Address ID</label>
+      <input type="number" id="id" name="id" class="form-control mb-4" disabled [(ngModel)]="address.id">
+    </div>
       <div class="form-group d-flex gap-2">
         <label for="zip">ZIP:</label>
         <input id="zip" name="zip" class="form-control " type="text" [(ngModel)]="address.zip">
         <label for="country">Country:</label>
-        <select class="form-select " name="country" id="country" [(ngModel)]="address.country">
-          <option *ngFor="let country of countries" [value]="country.country" >{{country.country}}</option>
+        <select class="form-select " name="country" id="country" [(ngModel)]="address.country" [formControl]="selectedCountry">
+          <option *ngFor="let country of countries | keyvalue" [value]="country.key" >{{country.key}}</option>
         </select>
         <label for="city">City:</label>
-        <input id="city" name="city" class="form-control d-inline-block" type="text" [(ngModel)]="address.city">
+        <select class="form-select " name="city" id="city" [(ngModel)]="address.city">
+          <option *ngFor="let city of cities" [value]="city" >{{city}}</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="street">Street:</label>
         <input id="street" name="street" class="form-control" type="text" [(ngModel)]="address.street">
       </div>
-      <div class="form-group">
+      <div
+      [ngStyle]="{visibility: addressEditor.controls['street'].invalid &&
+      !addressEditor.controls['street'].pristine ? 'visible': 'hidden' }"
+      class="text-danger">
+        Give you street!
+      </div>
+      <div class="form-group mb-3">
         <label for="notes">Remark:</label>
         <textarea id="notes" rows="3" name="notes" class="form-control" type="text" [(ngModel)]="address.notes"></textarea>
             </div>
@@ -52,11 +97,11 @@
   </button>
   <button
     class="btn btn-success text-capitalize"
-    (click)="onSaveCustomer(customer)">
+    (click)="onSaveBoth()">
     <i class="fa fa-save"></i>
     Save
   </button>
 </div>
-  </div>
+
 </div>
 

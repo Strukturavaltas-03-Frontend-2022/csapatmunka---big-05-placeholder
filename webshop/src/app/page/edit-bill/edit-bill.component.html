@@ -12,15 +12,15 @@
       <div class="form-group">
         <label>OrderID</label>
         <input
-        orderID="orderID"
+        name="orderID"
           [(ngModel)]="bill.orderID"
           type=input
           class="form-control"
-          pattern="{1,5}"
+          pattern="^[1-500]{1,5}$"
           required
         >
         <div *ngIf="editBillForm.controls['orderID']?.invalid" class="error-message">
-         OrderId is a number!
+        OrderId is a number!
         </div>
 
 
@@ -32,12 +32,12 @@
           [(ngModel)]="bill.amount"
           type=input
           class="form-control"
-          pattern="{1,50}"
+          pattern="^[1-500]{1,5}$"
           required
 
         >
         <div *ngIf="editBillForm.controls['amount']?.invalid" class="error-message">
-          {{ bill.amount }} is not a valid amount!
+          Invalid!
         </div>
       </div>
       <div class="form-group">

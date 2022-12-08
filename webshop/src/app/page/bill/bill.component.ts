@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { remove } from 'lodash-es';
+
+
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { Bill } from 'src/app/common/model/bill';
 import { BillService } from 'src/app/service/backend/bill.service';
 import { CustomerService } from 'src/app/service/backend/customer.service';
@@ -31,8 +32,29 @@ export class BillComponent {
 
   billList$: Observable<Bill[]> = this.billService.getAll();
 
+  sortKey: string = '';
+  sortDirection: number =1;
 
+  startSort(key: string): void {
+    if (key === this.sortKey) {
+      this.sortDirection *= -1
+    } else {
+      this.sortDirection = 1
+    }
 
+    this.sortKey = key
+  }
 
-
+  onDelete(bill: Bill): void {
+    this.billService.delete(bill).subscribe(
+      drug => this.billList$ = this.billService.getAll(),
+    );
+  }
+  showSuccess() {
+    this.toastrService.info('Are you sure?', 'Edit', {
+      timeOut: 3000,
+    });
+  }
 }
+
+

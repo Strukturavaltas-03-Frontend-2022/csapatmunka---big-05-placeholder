@@ -85,9 +85,7 @@ export class ProductHandlerService {
   };
 
   showToastrMsg(message: string) {
-    this.toastr.success(message, '', {
-      positionClass: 'toast-bottom-center',
-    });
+    this.toastr.success(message, '');
   }
 
   filterProducts(formEntries: DataObject) {
@@ -110,5 +108,60 @@ export class ProductHandlerService {
         this._filteredProducts.next(filteredProducts);
       })
     ).subscribe();
+  }
+
+  getProductsInfo(): Observable<DataObject> {
+    const productInfo = new BehaviorSubject<DataObject>({
+      productCount: '',
+      activeProductCount: '',
+      featuredProductCount: '',
+      minPrice: '',
+      maxPrice: '',
+    });
+
+    this.products.pipe(
+      tap((products) => {
+        console.log(products);
+        productInfo.next({
+          productCount: products.length,
+          activeProductCount: products.filter(prod => prod.active).length,
+          featuredProductCount: products.filter(prod => prod.featured).length,
+          minPrice: this.findMinPrice(products),
+          maxPrice: this.findMaxPrice(products),
+        })
+      })
+    ).subscribe();
+
+    return productInfo as Observable<DataObject>;
+  }
+
+  private findMinPrice(products: Product[]): string {
+    let min: string | number = '';
+    if (products.length) {
+      min = products[0].price;
+      for (let i = 1; i < products.length; i++) {
+        const product = products[i];
+        if (product.price < min) {
+          min = product.price;
+        }
+      }
+    }
+
+    return min.toString();
+  }
+
+  private findMaxPrice(products: Product[]): string {
+    let max: string | number = '';
+    if (products.length) {
+      max = products[0].price;
+      for (let i = 1; i < products.length; i++) {
+        const product = products[i];
+        if (product.price > max) {
+          max = product.price;
+        }
+      }
+    }
+
+    return max.toString();
   }
 }
