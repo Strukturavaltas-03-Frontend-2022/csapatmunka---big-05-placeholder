@@ -33,6 +33,7 @@ import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
+    FilterPipe,
     AppComponent,
     SidebarComponent,
     HomeComponent,
@@ -53,7 +54,7 @@ import { FilterPipe } from './pipe/filter.pipe';
     EditBillComponent,
 
 
-    FilterPipe,
+
 
 
   ],
