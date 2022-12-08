@@ -9,7 +9,26 @@
             <h6 class="text-white text-capitalize ps-3">Orders</h6>
           </div>
         </div>
+        <div class="card-body px-0 pb-2 mx-4 col-6 offset-6">
+          <div class="input-group ">
+            <input
+              [(ngModel)]="filterPhrase"
+              type="text"
+              class="form-control"
+              placeholder="search"
+              aria-label="Recipient's "
+              aria-describedby="basic-addon2"
+            />
+
+          </div>
+        </div>
         <div class="card-body px-0 pb-2">
+          <div class="text-center">
+            <a [routerLink]="'/orders/edit/' + 0" class="btn btn-info w-80">
+              Add new product
+            </a>
+          </div>
+
           <div class="table-responsive p-0">
             <table
               class="table table-hover table-striped align-items-center mb-0"
@@ -37,7 +56,9 @@
                   <th></th>
                 </tr>
               </thead>
-              <tbody *ngIf="list$ | async as list">
+              <tbody
+                *ngIf="list$ | async | filter : filterPhrase : 'status' as list"
+              >
                 <tr
                   *ngFor="
                     let order of list
@@ -45,13 +66,25 @@
                       | paginate : { itemsPerPage: 10, currentPage: p }
                   "
                 >
-                  <td>
+                  <!-- <td>
                     {{ order.customer?.firstName }}
                     {{ order.customer?.lastName }}
+                  </td> -->
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{ order.product?.name }}
+                    </p>
                   </td>
-                  <td><p class="text-xs font-weight-bold mb-0">{{ order.product?.name }}</p></td>
-                  <td><span class="text-secondary text-xs font-weight-bold">{{ order.amount | currency }}</span></td>
-                  <td><p class="text-xs font-weight-bold mb-0">{{ order.status }}</p></td>
+                  <td>
+                    <span class="text-secondary text-xs font-weight-bold">{{
+                      order.amount | currency
+                    }}</span>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{ order.status }}
+                    </p>
+                  </td>
                   <td>
                     <div class="d-flex btn-group align-items-end">
                       <button
@@ -61,8 +94,11 @@
                       >
                         <i class="fa fa-edit"></i>
                       </button>
-                      <button class="btn bg-gradient-primary btn-sm" (click)="onUpdate(order)">
-                        <i class="fa fa-trash" ></i>
+                      <button
+                        class="btn bg-gradient-primary btn-sm"
+                        (click)="onUpdate(order)"
+                      >
+                        <i class="fa fa-trash"></i>
                       </button>
                     </div>
                   </td>
@@ -80,7 +116,6 @@
                   <td>{{ "" }}</td>
                   <td></td>
                 </tr>
-
               </tbody>
             </table>
             <div class="position-relative">
