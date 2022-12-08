@@ -16,10 +16,10 @@
           <p class="mb-0">Active products: <span class="text-success text-sm font-weight-bolder">{{ (productsInfo | async)?.['activeProductCount'] }}</span></p>
           <p class="mb-0">Featured products: <span class="text-success text-sm font-weight-bolder">{{ (productsInfo | async)?.['featuredProductCount'] }}</span></p>
           <p class="mb-0">
-            Prices from
-            <span class="text-success text-sm font-weight-bolder">{{ (productsInfo | async)?.['minPrice'] }}</span>
+            Price range from
+            <span class="text-success text-sm font-weight-bolder">{{ (productsInfo | async)?.['minPrice'] | currency }}</span>
             to
-            <span class="text-success text-sm font-weight-bolder">{{ (productsInfo | async)?.['maxPrice'] }}</span>
+            <span class="text-success text-sm font-weight-bolder">{{ (productsInfo | async)?.['maxPrice'] | currency }}</span>
           </p>
         </div>
       </div>
