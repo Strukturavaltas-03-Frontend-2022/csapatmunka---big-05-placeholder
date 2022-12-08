@@ -51,6 +51,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     EditOrderComponent,
     BillComponent,
     EditBillComponent,
+
+
     FilterPipe,
 
 
