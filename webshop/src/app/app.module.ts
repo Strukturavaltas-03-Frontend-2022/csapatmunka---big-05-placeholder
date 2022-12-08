@@ -27,7 +27,10 @@ import { EditProductComponent } from './page/edit-product/edit-product.component
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
 import { SumPipe } from './pipe/sum.pipe';
 import { EditOrderComponent } from './page/edit-order/edit-order.component';
+
 import { BillComponent } from './page/bill/bill.component';
+
+
 import { EditBillComponent } from './page/edit-bill/edit-bill.component';
 import { FilterPipe } from './pipe/filter.pipe';
 
@@ -53,6 +56,7 @@ import { FilterPipe } from './pipe/filter.pipe';
     EditBillComponent,
     FilterPipe
 
+
   ],
   imports: [
     BrowserModule,
@@ -72,3 +76,5 @@ import { FilterPipe } from './pipe/filter.pipe';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

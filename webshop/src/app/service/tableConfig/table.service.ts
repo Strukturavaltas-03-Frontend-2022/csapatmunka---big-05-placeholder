@@ -42,7 +42,7 @@ export class TableService {
   ];
 
   orderTableColumns: ITableColumn[] = [
-    {title: 'Customer', key: 'customer'},
+    // {title: 'Customer', key: 'customer'},
     {title: 'Product', key: 'product'},
     {title: 'Amount', key: 'amount'},
     {title: 'Status', key: 'status'},
