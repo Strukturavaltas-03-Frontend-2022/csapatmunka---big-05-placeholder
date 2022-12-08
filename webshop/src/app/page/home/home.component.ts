@@ -10,9 +10,6 @@ import {
   ApexResponsive,
   ApexChart
 } from "ng-apexcharts";
-import { combineLatest } from 'rxjs';
-import { Data } from '@angular/router';
-import { NumberSymbol } from '@angular/common';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -34,6 +31,7 @@ export class HomeComponent implements OnInit {
   public customerList$ = this.customerSvc.customerList$;
   public orderList$ = this.orderSvc.getAll();
   public billList$ = this.billSvc.getAll();
+
 
   constructor(
     private productHandlerSvc: ProductHandlerService,

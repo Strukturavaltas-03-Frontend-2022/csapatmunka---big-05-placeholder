@@ -42,9 +42,9 @@
             <th class="text-secondary opacity-7"></th>
           </tr>
         </thead>
-        <tbody *ngIf="finalList$ | async">
+        <tbody>
           <tr
-            *ngFor="let customer of customerList$ | async | filter: searchPhrase: selectedFilter | productsort:sortKey:sortDirection | paginate: {itemsPerPage: 50, currentPage: p}">
+            *ngFor="let customer of list | async | filter: searchPhrase: selectedFilter | productsort:sortKey:sortDirection | paginate: {itemsPerPage: 50, currentPage: p}">
             <td>
               <div class="d-flex  px-2 py-1">
                 <div class="d-flex flex-column justify-content-center">

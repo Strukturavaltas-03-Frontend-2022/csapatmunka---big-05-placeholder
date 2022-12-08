@@ -62,7 +62,7 @@ export class CustomerService {
       next: () => {
         this.getAll()
       }
-  /*     next: customer => {
+/*       next: customer => {
         const itemIndex = this.getCachedItemIndexById(customer.id)
         if( itemIndex > -1){
           this.customerList$.getValue().splice(itemIndex, 0, customer)
@@ -82,20 +82,13 @@ export class CustomerService {
     })
   }
 
-/*   delete(id: number):void{
-    this.http.delete<Customer>(`${this.apiURL}${this.entityName}/${id}`).subscribe({
-      next: () => {
-        this.getAll()
-      }
-    })
-  } */
-
   add(customer: Customer): void{
     this.http.post<Customer[]>(`${this.apiURL}${this.entityName}`,customer).subscribe({
       next: () => {
         this.getAll()
+/*     this.customerList$.getValue().push(customer) */
       }
-      /* next: (customerList) => this.customerList$.getValue().push(customer) */
+
     })
   }
 

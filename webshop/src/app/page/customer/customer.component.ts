@@ -30,8 +30,6 @@ export class CustomerComponent {
 
   addressList$: Observable<Address[]> = this.addressService.addressList$
 
-  finalList$: Observable<any> = new Observable()
-
   tableColumns: ITableColumn[] = this.configTable.customerTableColumns
 
   sortKey: string = ''
@@ -50,15 +48,26 @@ export class CustomerComponent {
 
   options: CustomerFilter[] = this.configTable.customerFilterEditorFields
 
-  getMergedData(): void {
-    this.finalList$ = this.customerList$.pipe(combineLatestWith(this.addressList$),
+  list = combineLatest({
+    customer: this.customerList$,
+    address: this.addressList$
+  }).pipe(
+    map(result=> result.customer.map(customer=>{
+      customer.address = result.address.find(a=> a.id=== customer.id)
+      return customer
+    }))
+  )
+
+/*   getMergedData(): void {
+   this.customerList$.pipe(combineLatestWith(this.addressList$),
       map(([customer, address]) => customer.map(customer => {
         customer.address = address.find(a => a.id === customer.id)
-      })))
-  }
+      }))).subscribe()
+  } */
+
 
   constructor() {
-    this.getMergedData()
+  // this.getMergedData()
     this.selectedOption.valueChanges.subscribe(value=> this.selectedFilter=String(value)
     )
   }
@@ -79,7 +88,6 @@ export class CustomerComponent {
 
   onDelete(id: number): void {
     this.customerService.delete(id)
-    this.finalList$.subscribe(list => list)
     this.showSuccess()
   }
 

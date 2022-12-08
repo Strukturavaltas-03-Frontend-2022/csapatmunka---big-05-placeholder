@@ -3,7 +3,7 @@ import { Component, inject, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { count, of } from 'rxjs';
+import { combineLatest, combineLatestAll, count, of } from 'rxjs';
 import { Address } from 'src/app/common/model/address';
 import { Customer } from 'src/app/common/model/customer';
 import { AddressService } from 'src/app/service/backend/address.service';
@@ -65,11 +65,6 @@ export class EditCustomerComponent {
 
               this.addressService.get(params['customerID'])
               this.customerService.get(params['id'])
-/*               this.selectedAddress$.subscribe(value=>{
-                console.log(value);
-
-              }) */
-
             }
           }
           )
@@ -79,26 +74,15 @@ export class EditCustomerComponent {
     this.toastr.success('Adatok mentve!', 'Mentés!');
   }
 
-/*   onSaveCustomer(customer: Customer){
-
-    if(customer.id === 0){
-      this.customerService.add(customer)
-    }else{
-      this.customerService.update(customer)
-    }
-    this.showSuccess()
-    this.router.navigate(['customers'])
-    console.log(customer);
-
-  } */
 
   onSaveBoth():void{
     this.selectedCustomer$.subscribe(customer=>{
-      console.log(customer);
-
+      delete customer.address
       if(customer.id === 0){
+        console.log(customer);
         this.customerService.add(customer)
         this.selectedAddress$.subscribe(address=>{
+          console.log(address);
           this.addressService.add(address)
         })
       }else{
@@ -111,16 +95,5 @@ export class EditCustomerComponent {
     this.showSuccess()
     this.router.navigate(['customers'])
   }
-
-/*   onSaveAddress(address: Address){
-    if(address.customerID === 0){
-      this.addressService.add(address)
-    }else{
-      this.addressService.update(address)
-    }
-    console.log(address);
-
-    this.showSuccess()
-  } */
 
 }
