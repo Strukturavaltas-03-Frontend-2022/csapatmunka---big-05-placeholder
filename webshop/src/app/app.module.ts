@@ -30,6 +30,9 @@ import { EditOrderComponent } from './page/edit-order/edit-order.component';
 import { BillComponent } from './page/bill/bill.component';
 import { EditBillComponent } from './page/edit-bill/edit-bill.component';
 import { FilterPipe } from './pipe/filter.pipe';
+import { CustomerSumPipe } from './pipe/customer-sum.pipe';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +54,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     EditOrderComponent,
     BillComponent,
     EditBillComponent,
-    FilterPipe
+    FilterPipe,
+    CustomerSumPipe
 
   ],
   imports: [
@@ -66,7 +70,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     IMaskModule,
     MatAutocompleteModule,
     ToastrModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
