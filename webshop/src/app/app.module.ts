@@ -56,7 +56,12 @@ import { FilterPipe } from './pipe/filter.pipe';
     EditOrderComponent,
     BillComponent,
     EditBillComponent,
+<<<<<<< HEAD
     FilterPipe,
+=======
+    FilterPipe
+
+>>>>>>> 3379ee6640db8946e8f0d04647020ab243cb633f
 
   ],
   imports: [

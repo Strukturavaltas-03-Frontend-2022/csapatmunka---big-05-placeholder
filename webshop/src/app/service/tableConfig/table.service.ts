@@ -14,6 +14,11 @@ export class FormField{
   validators: ValidatorFn[] = []
 }
 
+export class CustomerFilter{
+  name:string = '';
+  value: string = '';
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +53,16 @@ export class TableService {
     {title:'OrderID', key:'orderID'},
     {title:'Amount', key:'amount'},
     {title:'Status', key:'status'},
+  ]
+
+
+
+
+  customerFilterEditorFields: CustomerFilter[] = [
+    {name: 'First Name', value: 'firstName'},
+    {name: 'Last Name', value: 'lastName'},
+    {name: 'Email', value: 'email'},
+    {name: 'Address', value: 'address'},
   ]
 
 
