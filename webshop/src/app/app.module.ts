@@ -3,7 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@angular/cdk/overlay'
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IMaskModule } from 'angular-imask';
@@ -27,10 +27,7 @@ import { EditProductComponent } from './page/edit-product/edit-product.component
 import { ToggleButtonComponent } from './common/toggle-button/toggle-button.component';
 import { SumPipe } from './pipe/sum.pipe';
 import { EditOrderComponent } from './page/edit-order/edit-order.component';
-
 import { BillComponent } from './page/bill/bill.component';
-
-
 import { EditBillComponent } from './page/edit-bill/edit-bill.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { CustomerSumPipe } from './pipe/customer-sum.pipe';
@@ -39,6 +36,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
+    FilterPipe,
     AppComponent,
     SidebarComponent,
     HomeComponent,
@@ -60,7 +58,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     FilterPipe,
     CustomerSumPipe
 
-
   ],
   imports: [
     BrowserModule,
@@ -76,6 +73,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     ToastrModule.forRoot(),
     NgxPaginationModule,
     NgApexchartsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
