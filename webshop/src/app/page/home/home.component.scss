@@ -3,3 +3,23 @@
   margin: 35px auto;
   padding: 0;
 }
+
+.card-footer {
+  height: 8rem;
+}
+
+.chart {
+  &__header {
+    height: 16rem;
+  }
+
+  &__diagram {
+    height: 16rem;
+  }
+
+  &__footer {
+    height: 9rem;
+  }
+}
+
+

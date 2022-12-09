@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, map } from 'rxjs';
 import { Order } from 'src/app/common/model/order';
@@ -13,7 +14,7 @@ import { TableService } from 'src/app/service/tableConfig/table.service';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit {
   orderService: OrderService = inject(OrderService);
   productService: ProductService = inject(ProductService);
   customerService: CustomerService = inject(CustomerService);
@@ -28,6 +29,13 @@ export class OrderComponent {
   sortKey = '';
   sortDirection = 1;
 
+  filterPhrase: string = '';
+
+  constructor(
+
+    private router: Router,
+
+  ) { }
   list$ = combineLatest({
     prod: this.productService.getAll(),
     //cust: this.customerService.getAll(),
@@ -61,4 +69,11 @@ export class OrderComponent {
       timeOut: 3000,
     });
   }
+  ngOnInit(): void {
+
+  }
+  onOrderNew(): void {
+  this.router.navigate(['/', 'orders', 'edit', 0]);
 }
+}
+

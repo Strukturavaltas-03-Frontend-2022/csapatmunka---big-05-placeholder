@@ -3,7 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@angular/cdk/overlay'
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IMaskModule } from 'angular-imask';
@@ -36,6 +36,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
+    FilterPipe,
     AppComponent,
     SidebarComponent,
     HomeComponent,
@@ -72,8 +73,11 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     ToastrModule.forRoot(),
     NgxPaginationModule,
     NgApexchartsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
