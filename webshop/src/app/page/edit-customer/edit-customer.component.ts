@@ -37,6 +37,8 @@ export class EditCustomerComponent {
 
   selectedAddress$ = this.addressService.selectedAddress$
 
+  addressList$ = this.addressService.addressList$
+
   selectedCountry = new FormControl('')
 
   cities: String[] = []
@@ -44,8 +46,6 @@ export class EditCustomerComponent {
   countries = countries
 
   ngOnInit():void{
-
-    this.addressService.getAll()
 
       this.selectedCountry.valueChanges.subscribe(
         value=>{
@@ -57,12 +57,9 @@ export class EditCustomerComponent {
         this.actRoute.params.subscribe(
           params => {
             if(params['id'] === '0'){
-              of(new Address(), new Customer())
-              console.log(params);
-
+              this.selectedAddress$.next(new Address())
+              this.selectedCustomer$.next(new Customer())
             }else{
-              console.log(params);
-
               this.addressService.get(params['customerID'])
               this.customerService.get(params['id'])
             }
@@ -74,15 +71,11 @@ export class EditCustomerComponent {
     this.toastr.success('Adatok mentve!', 'Mentés!');
   }
 
-
   onSaveBoth():void{
     this.selectedCustomer$.subscribe(customer=>{
-      delete customer.address
       if(customer.id === 0){
-        console.log(customer);
-        this.customerService.add(customer)
         this.selectedAddress$.subscribe(address=>{
-          console.log(address);
+          this.customerService.add(customer)
           this.addressService.add(address)
         })
       }else{

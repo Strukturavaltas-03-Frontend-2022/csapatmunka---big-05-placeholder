@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, combineLatestWith, map, Observable, Subject } from 'rxjs';
@@ -14,7 +14,7 @@ import { TableService, ITableColumn, CustomerFilter } from 'src/app/service/tabl
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
-export class CustomerComponent {
+export class CustomerComponent implements OnInit {
 
   customerService: CustomerService = inject(CustomerService)
 
@@ -48,7 +48,7 @@ export class CustomerComponent {
 
   options: CustomerFilter[] = this.configTable.customerFilterEditorFields
 
-  list = combineLatest({
+/*   list = combineLatest({
     customer: this.customerList$,
     address: this.addressList$
   }).pipe(
@@ -56,18 +56,17 @@ export class CustomerComponent {
       customer.address = result.address.find(a=> a.id=== customer.id)
       return customer
     }))
-  )
+  ) */
 
-/*   getMergedData(): void {
-   this.customerList$.pipe(combineLatestWith(this.addressList$),
+    ngOnInit():void{
+      this.customerList$.pipe(combineLatestWith(this.addressList$),
       map(([customer, address]) => customer.map(customer => {
         customer.address = address.find(a => a.id === customer.id)
       }))).subscribe()
-  } */
+    }
 
 
   constructor() {
-  // this.getMergedData()
     this.selectedOption.valueChanges.subscribe(value=> this.selectedFilter=String(value)
     )
   }
@@ -88,6 +87,7 @@ export class CustomerComponent {
 
   onDelete(id: number): void {
     this.customerService.delete(id)
+    this.addressService.delete(id)
     this.showSuccess()
   }
 
