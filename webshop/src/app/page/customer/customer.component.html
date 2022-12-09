@@ -42,7 +42,7 @@
             <th class="text-secondary opacity-7"></th>
           </tr>
         </thead>
-        <tbody *ngIf="finalList$ | async">
+        <tbody>
           <tr
             *ngFor="let customer of customerList$ | async | filter: searchPhrase: selectedFilter | productsort:sortKey:sortDirection | paginate: {itemsPerPage: 50, currentPage: p}">
             <td>

@@ -88,10 +88,9 @@ export class AddressService {
 
   add(address: Address): void{
     this.http.post<Address[]>(`${this.apiURL}${this.entityName}`,address).subscribe({
-      next: (addressList) => this.addressList$.getValue().push(address)
-/*       next: () => {
+      next: () => {
         this.getAll()
-      } */
+      }
    /*    next: (addressList) => this.addressList$.getValue().push(address) */
     })
   }
