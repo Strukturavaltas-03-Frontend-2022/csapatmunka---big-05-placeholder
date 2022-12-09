@@ -80,8 +80,8 @@
   <div class="row mt-4">
     <div class="col-6 mt-4 mb-4">
       <div class="card z-index-2 ">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1" *ngIf="chartOptions">
+        <div class="chart__header card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+          <div class="chart__diagram bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1" *ngIf="chartOptions">
             <div id="chart" class="m-0">
               <apx-chart
                 [series]="chartOptions.series"
@@ -93,7 +93,7 @@
 
           </div>
         </div>
-        <div class="card-body">
+        <div class="chart__footer card-body">
           <h6 class="mb-0 ">Customers total</h6>
           <p class="text-sm ">Last Campaign Performance</p>
           <hr class="dark horizontal">
@@ -106,8 +106,8 @@
     </div>
     <div class="col-6 mt-4 mb-4">
       <div class="card z-index-2  ">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-          <div *ngIf="productChartOptions" class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+        <div class="chart__header card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+          <div *ngIf="productChartOptions" class="chart__diagram bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
             <div id="prodChart" class="m-0">
               <apx-chart
                 [series]="productChartOptions.series"
@@ -118,7 +118,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
+        <div class="chart__footer card-body">
           <h6 class="mb-0 "> Product categories </h6>
           <p class="text-sm "> Split among categories </p>
         </div>
